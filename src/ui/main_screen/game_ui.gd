@@ -23,3 +23,9 @@ func hell_animation() -> void:
 
 func heaven_animation() -> void:
     pass
+
+func victory():
+    %VictoryLayer.show()
+
+func defeat():
+    %DefeatLayer.show()

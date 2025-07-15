@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cp2lph3fek53m"]
+[gd_scene load_steps=10 format=3 uid="uid://cp2lph3fek53m"]
 
 [ext_resource type="Script" uid="uid://clagwd32ypgph" path="res://src/ui/main_screen/game_ui.gd" id="1_mj8uy"]
 [ext_resource type="PackedScene" uid="uid://cumtr8ohypw6f" path="res://src/ui/character/character_ui.tscn" id="2_3rlp6"]
 [ext_resource type="Script" uid="uid://c6prsca8xgap" path="res://src/ui/main_screen/custom_progress_bar.gd" id="2_mj8uy"]
+[ext_resource type="Script" uid="uid://jdng4kd4qh4v" path="res://src/ui/main_screen/replay_button.gd" id="4_cc1gc"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lqfw2"]
 
@@ -13,6 +14,20 @@ bg_color = Color(0.913725, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ue6oa"]
 bg_color = Color(0.246795, 0.602383, 0.286598, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o1vnd"]
+bg_color = Color(0.854902, 0.0156863, 0.0862745, 0.886275)
+border_width_left = 50
+border_width_top = 50
+border_width_right = 50
+border_width_bottom = 50
+border_color = Color(1, 1, 1, 1)
+border_blend = true
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+shadow_color = Color(0, 0, 0, 0.603922)
 
 [node name="GameUI" type="Control"]
 layout_mode = 3
@@ -128,3 +143,91 @@ offset_left = -703.0
 offset_top = -311.0
 offset_right = 708.0
 offset_bottom = 216.0
+
+[node name="VictoryLayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+visible = false
+
+[node name="Panel" type="Panel" parent="VictoryLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -843.0
+offset_top = -480.0
+offset_right = 843.0
+offset_bottom = 479.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_o1vnd")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VictoryLayer/Panel"]
+layout_mode = 0
+offset_left = 111.0
+offset_top = 115.0
+offset_right = 1576.0
+offset_bottom = 784.0
+theme_override_constants/separation = 60
+
+[node name="Label" type="Label" parent="VictoryLayer/Panel/VBoxContainer"]
+modulate = Color(0.0562945, 0.00369703, 0.108891, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "You consumed enough souls to please me.
+
+You're my best secret agent, you know ?
+
+Sign this pact to continue to feed me"
+
+[node name="ReplayButton" type="Button" parent="VictoryLayer/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 60
+text = "Consume more souls"
+script = ExtResource("4_cc1gc")
+
+[node name="DefeatLayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+visible = false
+
+[node name="Panel" type="Panel" parent="DefeatLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -843.0
+offset_top = -480.0
+offset_right = 843.0
+offset_bottom = 479.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_o1vnd")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DefeatLayer/Panel"]
+layout_mode = 0
+offset_left = 111.0
+offset_top = 115.0
+offset_right = 1576.0
+offset_bottom = 664.0
+theme_override_constants/separation = 60
+
+[node name="Label" type="RichTextLabel" parent="DefeatLayer/Panel/VBoxContainer"]
+modulate = Color(0.0562945, 0.00369703, 0.108891, 1)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 60
+text = "WAIT A MINUTE !!! You're not the purgatory judge, you filthy demon.
+
+GET OUT"
+fit_content = true
+
+[node name="ReplayButton" type="Button" parent="DefeatLayer/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 60
+text = "TRY AGAIN"
+script = ExtResource("4_cc1gc")
+
+[connection signal="pressed" from="VictoryLayer/Panel/VBoxContainer/ReplayButton" to="VictoryLayer/Panel/VBoxContainer/ReplayButton" method="_on_pressed"]
+[connection signal="pressed" from="DefeatLayer/Panel/VBoxContainer/ReplayButton" to="DefeatLayer/Panel/VBoxContainer/ReplayButton" method="_on_pressed"]

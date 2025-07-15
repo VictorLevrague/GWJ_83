@@ -14,7 +14,7 @@ metadata/_custom_type_script = "uid://befg2a3ewk63l"
 [sub_resource type="Resource" id="Resource_d14be"]
 script = ExtResource("1_ry36b")
 text = "Work at hospital"
-value = 20.0
+value = 100.0
 is_value_visible = false
 metadata/_custom_type_script = "uid://befg2a3ewk63l"
 

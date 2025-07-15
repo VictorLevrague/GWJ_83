@@ -8,10 +8,14 @@ var hell_completion: float = 0.:
     set(value):
         hell_completion = value
         %GameUI.update_progress_bar("hell", hell_completion)
+        if hell_completion >= 100.:
+            victory()
 var cover_percentage: float = 100.:
     set(value):
         cover_percentage = value
         %GameUI.update_progress_bar("cover", cover_percentage)
+        if cover_percentage <= 0.:
+            defeat()
 var detection_threshold: float = 20.
 var possible_characters: Array[Character] = [load("res://src/resources/characters/char_test_above.tres"), 
                                             load("res://src/resources/characters/char_test_below.tres")]
@@ -28,11 +32,17 @@ func on_heaven_decision():
 func on_hell_decision():
         if current_character:
             await %GameUI.hell_animation()
-            hell_completion += current_character.compute_sum_action_values()
             cover_percentage -= current_character.compute_sum_action_values() if current_character.compute_sum_action_values() > detection_threshold else 0
+            hell_completion += current_character.compute_sum_action_values()
             enter_next_character()
         else:
             push_warning("Character not attributed")
 
 func enter_next_character():
     current_character = possible_characters[randi_range(0, len(possible_characters) - 1)]
+
+func victory() -> void:
+    %GameUI.victory()
+
+func defeat() -> void:
+    %GameUI.defeat()
