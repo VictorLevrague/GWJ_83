@@ -1,0 +1,97 @@
+[gd_scene load_steps=6 format=3 uid="uid://cumtr8ohypw6f"]
+
+[ext_resource type="Script" uid="uid://cwwsqmjvjkmc3" path="res://src/ui/character/character_ui.gd" id="1_3lodt"]
+[ext_resource type="Texture2D" uid="uid://tmt5jvny2fbx" path="res://icon.svg" id="1_yawyt"]
+[ext_resource type="Shader" uid="uid://dxcqclyrirhpu" path="res://src/shaders/burn.gdshader" id="2_x2v3r"]
+[ext_resource type="Texture2D" uid="uid://vaat28dhqmwl" path="res://src/shaders/centered_noise.tres" id="3_p1cs5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ucxxi"]
+shader = ExtResource("2_x2v3r")
+shader_parameter/noise = ExtResource("3_p1cs5")
+shader_parameter/dissolve_threshold = 1.0
+
+[node name="CharacterUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3lodt")
+
+[node name="Texture" type="TextureRect" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_ucxxi")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -203.0
+offset_top = -219.0
+offset_right = 199.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_yawyt")
+expand_mode = 1
+
+[node name="PositiveActions" type="Panel" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -219.5
+offset_right = 479.0
+offset_bottom = 199.5
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PositiveActions"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 20
+
+[node name="PositiveActionsContainer" type="VBoxContainer" parent="PositiveActions/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="NegativeActions" type="Panel" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -479.0
+offset_top = -209.5
+offset_bottom = 209.5
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="NegativeActions"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 20
+
+[node name="NegativeActionsContainer" type="VBoxContainer" parent="NegativeActions/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2

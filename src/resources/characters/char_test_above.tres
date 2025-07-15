@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="Character" load_steps=6 format=3 uid="uid://bw27usy564tlh"]
+
+[ext_resource type="Script" uid="uid://befg2a3ewk63l" path="res://src/model/action.gd" id="1_ry36b"]
+[ext_resource type="Texture2D" uid="uid://x6bynvajhycl" path="res://assets/character_illustrations/baby_mammoth.png" id="2_d14be"]
+[ext_resource type="Script" uid="uid://cfccwfbgi0lpf" path="res://src/model/character.gd" id="3_bvj4f"]
+
+[sub_resource type="Resource" id="Resource_ry36b"]
+script = ExtResource("1_ry36b")
+text = "Helped a grandma to cross the street"
+value = 10.0
+is_value_visible = false
+metadata/_custom_type_script = "uid://befg2a3ewk63l"
+
+[sub_resource type="Resource" id="Resource_d14be"]
+script = ExtResource("1_ry36b")
+text = "Work at hospital"
+value = 20.0
+is_value_visible = false
+metadata/_custom_type_script = "uid://befg2a3ewk63l"
+
+[resource]
+script = ExtResource("3_bvj4f")
+label_name = ""
+illustration = ExtResource("2_d14be")
+positive_actions = Array[ExtResource("1_ry36b")]([SubResource("Resource_ry36b"), SubResource("Resource_d14be")])
+negative_actions = Array[ExtResource("1_ry36b")]([])
+metadata/_custom_type_script = "uid://cfccwfbgi0lpf"

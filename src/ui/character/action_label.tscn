@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://qpxjbdjdgx7a"]
+
+[node name="Label" type="RichTextLabel"]
+offset_right = 143.0
+offset_bottom = 42.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "Label text"
