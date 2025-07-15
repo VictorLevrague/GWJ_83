@@ -30,8 +30,8 @@ func hell_animation() -> void:
     
 
 func burn_tween() -> Tween:
-    var tween = get_tree().create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-    tween.tween_property(%Texture.material, "shader_parameter/dissolve_threshold", 0, 1.5)
+    var tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+    tween.tween_property(%Texture.material, "shader_parameter/dissolve_threshold", 0, 1.)
     return tween
 
 func clear(container: Container):

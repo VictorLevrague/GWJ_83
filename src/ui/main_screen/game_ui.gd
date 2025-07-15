@@ -16,7 +16,7 @@ func update_progress_bar(name_progress_bar: String, value: float):
             progress_bar = %HellBar
         "cover":
             progress_bar = %CoverBar
-    progress_bar.set_and_animate(value)
+    await progress_bar.set_and_animate(value)
 
 func hell_animation() -> void:
     await %CharacterUI.hell_animation()
