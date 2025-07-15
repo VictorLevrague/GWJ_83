@@ -8,6 +8,7 @@ var character: Character:
 func _ready() -> void:
     %HeavenButton.pressed.connect(func(): Signals.emit_signal("send_to_heaven"))
     %HellButton.pressed.connect(func(): Signals.emit_signal("send_to_hell"))
+    %NextCharacterButton.disabled = true
 
 func update_progress_bar(name_progress_bar: String, value: float):
     var progress_bar: ProgressBar
@@ -29,3 +30,15 @@ func victory():
 
 func defeat():
     %DefeatLayer.show()
+
+func enable_next_character_call() -> void:
+    %NextCharacterButton.disabled = false
+    %HeavenButton.disabled = true
+    %HellButton.disabled = true
+    %CharacterUI.clear_action_containers()
+
+func _on_next_character_button_pressed() -> void:
+    Signals.emit_signal("next_character")
+    %NextCharacterButton.disabled = true
+    %HeavenButton.disabled = false
+    %HellButton.disabled = false
