@@ -1,14 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cumtr8ohypw6f"]
+[gd_scene load_steps=3 format=3 uid="uid://cumtr8ohypw6f"]
 
 [ext_resource type="Script" uid="uid://cwwsqmjvjkmc3" path="res://src/ui/character/character_ui.gd" id="1_3lodt"]
 [ext_resource type="Texture2D" uid="uid://tmt5jvny2fbx" path="res://icon.svg" id="1_yawyt"]
-[ext_resource type="Shader" uid="uid://dxcqclyrirhpu" path="res://src/shaders/burn.gdshader" id="2_x2v3r"]
-[ext_resource type="Texture2D" uid="uid://vaat28dhqmwl" path="res://src/shaders/centered_noise.tres" id="3_p1cs5"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ucxxi"]
-shader = ExtResource("2_x2v3r")
-shader_parameter/noise = ExtResource("3_p1cs5")
-shader_parameter/dissolve_threshold = 1.0
 
 [node name="CharacterUI" type="Control"]
 layout_mode = 3
@@ -21,7 +14,6 @@ script = ExtResource("1_3lodt")
 
 [node name="Texture" type="TextureRect" parent="."]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_ucxxi")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

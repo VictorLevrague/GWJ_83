@@ -19,7 +19,7 @@ func update_progress_bar(name_progress_bar: String, value: float):
     progress_bar.set_and_animate(value)
 
 func hell_animation() -> void:
-    %CharacterUI.hell_animation()
+    await %CharacterUI.hell_animation()
 
 func heaven_animation() -> void:
     pass
