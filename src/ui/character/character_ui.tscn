@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cumtr8ohypw6f"]
+[gd_scene load_steps=4 format=3 uid="uid://cumtr8ohypw6f"]
 
 [ext_resource type="Script" uid="uid://cwwsqmjvjkmc3" path="res://src/ui/character/character_ui.gd" id="1_3lodt"]
 [ext_resource type="Texture2D" uid="uid://tmt5jvny2fbx" path="res://icon.svg" id="1_yawyt"]
+[ext_resource type="StyleBox" uid="uid://didhwndqt1b3n" path="res://src/ui/character/action_panel.tres" id="3_bfufk"]
 
 [node name="CharacterUI" type="Control"]
 layout_mode = 3
@@ -39,6 +40,7 @@ offset_top = -219.5
 offset_right = 479.0
 offset_bottom = 199.5
 grow_vertical = 2
+theme_override_styles/panel = ExtResource("3_bfufk")
 
 [node name="MarginContainer" type="MarginContainer" parent="PositiveActions"]
 layout_mode = 1
@@ -71,6 +73,7 @@ offset_top = -209.5
 offset_bottom = 209.5
 grow_horizontal = 0
 grow_vertical = 2
+theme_override_styles/panel = ExtResource("3_bfufk")
 
 [node name="MarginContainer" type="MarginContainer" parent="NegativeActions"]
 layout_mode = 1

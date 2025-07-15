@@ -37,3 +37,7 @@ func burn_tween() -> Tween:
 func clear(container: Container):
     for child in container.get_children():
         child.queue_free()
+
+func clear_action_containers():
+    clear(%PositiveActionsContainer)
+    clear(%NegativeActionsContainer)
