@@ -1,5 +1,8 @@
 extends Node
 
+var HELL_COMPLETION_RATE := 0.5
+var COVER_DEPLETION_RATE := 0.8
+
 var current_character: Character:
     set(value):
         current_character = value
@@ -7,15 +10,17 @@ var current_character: Character:
 var hell_completion: float = 0.:
     set(value):
         hell_completion = value
-        %GameUI.update_progress_bar("hell", hell_completion)
-        if hell_completion >= 100.:
-            victory()
+        if cover_percentage > 0.:
+            await %GameUI.update_progress_bar("hell", hell_completion)
+            if hell_completion >= 100.:
+                victory()
 var cover_percentage: float = 100.:
     set(value):
         cover_percentage = value
-        %GameUI.update_progress_bar("cover", cover_percentage)
+        await %GameUI.update_progress_bar("cover", cover_percentage)
         if cover_percentage <= 0.:
             defeat()
+        detection_threshold *= cover_percentage/100 * 2 #2 is magic number
 var detection_threshold: float = 20.
 var possible_characters: Array[Character] = [load("res://src/resources/characters/char_test_above.tres"), 
                                             load("res://src/resources/characters/char_test_below.tres")]
@@ -31,9 +36,9 @@ func on_heaven_decision():
 
 func on_hell_decision():
         if current_character:
+            cover_percentage -= current_character.compute_sum_action_values() * COVER_DEPLETION_RATE if current_character.compute_sum_action_values() > detection_threshold else 0
+            hell_completion += current_character.compute_sum_action_values() * HELL_COMPLETION_RATE
             await %GameUI.hell_animation()
-            cover_percentage -= current_character.compute_sum_action_values() if current_character.compute_sum_action_values() > detection_threshold else 0
-            hell_completion += current_character.compute_sum_action_values()
             enter_next_character()
         else:
             push_warning("Character not attributed")
