@@ -27,6 +27,10 @@ window/size/mode=2
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[gui]
+
+theme/custom_font="uid://bsyagip57cxjx"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
