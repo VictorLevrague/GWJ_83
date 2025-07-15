@@ -21,15 +21,15 @@ func fill_actions_container(container: Container, actions: Array[Action], color:
         container.add_child(label)
 
 func hell_animation() -> void:
-    #%Texture.material = ShaderMaterial.new()
     %Texture.material.set("shader", load("res://src/shaders/burn.gdshader"))
-    %Texture.material.set("shader_parameter/noise", load("res://src/shaders/centered_noise.tres"))
+    %Texture.material.set("shader_parameter/noise", load("res://assets/for_shaders/centered_noise.tres"))
+    %Texture.material.set("shader_parameter/burn_color_gradient", load("res://assets/for_shaders/burn_gradient_1d.tres"))
     %Texture.material.set("shader_parameter/dissolve_threshold", 1.)
-    var dissolve_tween = dissolve_tween()
-    await dissolve_tween.finished
+    var burn_tween = burn_tween()
+    await burn_tween.finished
     
 
-func dissolve_tween() -> Tween:
+func burn_tween() -> Tween:
     var tween = get_tree().create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
     tween.tween_property(%Texture.material, "shader_parameter/dissolve_threshold", 0, 1.5)
     return tween

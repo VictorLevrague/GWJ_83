@@ -3,10 +3,10 @@
 [ext_resource type="Script" uid="uid://clagwd32ypgph" path="res://src/ui/main_screen/game_ui.gd" id="1_mj8uy"]
 [ext_resource type="PackedScene" uid="uid://cumtr8ohypw6f" path="res://src/ui/character/character_ui.tscn" id="2_3rlp6"]
 [ext_resource type="Script" uid="uid://c6prsca8xgap" path="res://src/ui/main_screen/custom_progress_bar.gd" id="2_mj8uy"]
-[ext_resource type="Shader" uid="uid://cxtubp46ftfbv" path="res://src/shaders/hell_button.gdshader" id="2_obik5"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xlnb1"]
-shader = ExtResource("2_obik5")
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lqfw2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cc1gc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d2rst"]
 bg_color = Color(0.913725, 0, 0, 1)
@@ -52,14 +52,15 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_lqfw2")
 text = "Heaven"
 
 [node name="HellButton" type="Button" parent="JudgeButtons"]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_xlnb1")
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cc1gc")
 text = "Hell
 "
 

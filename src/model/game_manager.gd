@@ -27,9 +27,9 @@ func on_heaven_decision():
 
 func on_hell_decision():
         if current_character:
+            await %GameUI.hell_animation()
             hell_completion += current_character.compute_sum_action_values()
             cover_percentage -= current_character.compute_sum_action_values() if current_character.compute_sum_action_values() > detection_threshold else 0
-            await %GameUI.hell_animation()
             enter_next_character()
         else:
             push_warning("Character not attributed")
