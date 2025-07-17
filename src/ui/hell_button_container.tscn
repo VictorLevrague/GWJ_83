@@ -1,0 +1,96 @@
+[gd_scene load_steps=10 format=3 uid="uid://bw2ih1pk6v07x"]
+
+[ext_resource type="Script" uid="uid://c0qdvxi1ruwss" path="res://src/ui/hell_button_container.gd" id="1_5slk8"]
+[ext_resource type="Shader" uid="uid://d21qur45orv4r" path="res://src/shaders/fire.gdshader" id="2_5slk8"]
+[ext_resource type="Shader" uid="uid://bvthamc2x7ibt" path="res://src/ui/main_screen/outline_pixel.gdshader" id="3_nye21"]
+[ext_resource type="Texture2D" uid="uid://becglfg1ixldm" path="res://src/shaders/fire_noise.tres" id="3_t184d"]
+[ext_resource type="Texture2D" uid="uid://c6o3bklnira2t" path="res://assets/buttons/hell_button.png" id="5_lhjyt"]
+[ext_resource type="Texture2D" uid="uid://bn4ykonsalmeg" path="res://assets/buttons/hell_button_grayscale.png" id="6_aannc"]
+[ext_resource type="Script" uid="uid://c3hx2vk1dqbri" path="res://src/ui/main_screen/hell_button.gd" id="6_fiink"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_brabc"]
+shader = ExtResource("3_nye21")
+shader_parameter/clr = Color(0, 0, 0, 1)
+shader_parameter/type = 2
+shader_parameter/thickness = 2.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e0355"]
+shader = ExtResource("2_5slk8")
+shader_parameter/noise_tex = ExtResource("3_t184d")
+shader_parameter/root_color = Color(1, 0.75, 0.3, 1)
+shader_parameter/tip_color = Color(1, 0.03, 0.001, 1)
+shader_parameter/poster_color = 11.24
+shader_parameter/fire_alpha = 1.0
+shader_parameter/fire_speed = Vector2(0.4, 0.8)
+shader_parameter/fire_aperture = 0.22
+shader_parameter/fire_strength = 0.4
+
+[node name="HellButtonContainer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -890.0
+offset_bottom = -528.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5slk8")
+
+[node name="OutlineContainer" type="SubViewportContainer" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_brabc")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OutlineViewport" type="SubViewport" parent="OutlineContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1030, 552)
+render_target_update_mode = 4
+
+[node name="HellButton" type="TextureButton" parent="OutlineContainer/OutlineViewport"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_e0355")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 232.0
+offset_top = 137.0
+offset_right = -220.0
+offset_bottom = -92.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(257, 138)
+size_flags_horizontal = 3
+texture_normal = ExtResource("5_lhjyt")
+texture_disabled = ExtResource("6_aannc")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("6_fiink")
+
+[node name="Label" type="Label" parent="OutlineContainer/OutlineViewport/HellButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -97.2244
+offset_top = -27.5867
+offset_right = 90.7756
+offset_bottom = 32.4133
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "Hell"
+horizontal_alignment = 1
+
+[connection signal="mouse_entered" from="OutlineContainer/OutlineViewport/HellButton" to="OutlineContainer/OutlineViewport/HellButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="OutlineContainer/OutlineViewport/HellButton" to="OutlineContainer/OutlineViewport/HellButton" method="_on_mouse_exited"]
+[connection signal="pressed" from="OutlineContainer/OutlineViewport/HellButton" to="OutlineContainer/OutlineViewport/HellButton" method="_on_pressed"]

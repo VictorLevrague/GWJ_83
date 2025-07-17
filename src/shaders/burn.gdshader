@@ -16,7 +16,7 @@ void fragment() {
     vec4 noise_texture = texture(noise, UV);
     main_texture.a *= step(noise_texture.r, dissolve_threshold);
     //Scale [dissolve_threshold, dissolve_threshold * burn_size] to [0,1] values for UV usage
-    vec2 burn_uv = vec2(inverse_lerp(dissolve_threshold, dissolve_threshold * burn_size, noise_texture.r), 0.0); 
+    vec2 burn_uv = vec2(inverse_lerp(dissolve_threshold, dissolve_threshold * burn_size, noise_texture.r), 0.0);
     vec4 burn_texture = texture(burn_color_gradient, burn_uv);
     burn_texture.a *= texture(TEXTURE, UV).a; //To match texture initial transparency
     burn_texture.a *= step(noise_texture.r, dissolve_threshold*burn_size);
