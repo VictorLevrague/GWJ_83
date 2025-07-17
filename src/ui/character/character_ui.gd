@@ -5,21 +5,38 @@ var character: Character:
         character = value
         if character:
             %Texture.texture = character.illustration
-            %Texture.modulate.a = 1 #Big hack to solve shader issue
             %Texture.material = ShaderMaterial.new()
             fill_actions_container(%PositiveActionsContainer, character.positive_actions, Color(0.498039, 1, 0, 1))
             fill_actions_container(%NegativeActionsContainer, character.negative_actions, Color(1, 0, 0, 1))
+            entering_animation()
         else:
             push_error("Missing full character")
 
+func entering_animation():
+    %Texture.modulate.a = 0.0 
+    %Texture.scale = Vector2(0.5, 0.5)
+    var original_y = %Texture.position.y
+    %Texture.position.y -= 200  # Start below
+    var tween := create_tween()
+    tween.set_parallel()
+    tween.tween_property(%Texture, "modulate:a", 1.0, 1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+    tween.tween_property(%Texture, "scale", Vector2(1, 1), 1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+    tween.tween_property(%Texture, "position:y", original_y, 0.8)
+
 func fill_actions_container(container: Container, actions: Array[Action], color: Color):
     clear(container)
+    container.modulate.a = 0
     for action in actions:
         var label = load("res://src/ui/character/action_label.tscn").instantiate()
         var value_label = " (" + str(action.value) + ")"
         label.text = action.text + value_label if action.is_value_visible else action.text
         label.modulate = color
         container.add_child(label)
+    fade_in_container(container)
+
+func fade_in_container(container: Container):
+    var tween := create_tween()
+    tween.tween_property(container, "modulate:a", 1.0, 1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
 func hell_animation() -> void:
     %Texture.material.set("shader", load("res://src/shaders/burn.gdshader"))
