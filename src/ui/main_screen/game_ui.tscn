@@ -1,13 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://cp2lph3fek53m"]
+[gd_scene load_steps=17 format=3 uid="uid://cp2lph3fek53m"]
 
 [ext_resource type="Script" uid="uid://clagwd32ypgph" path="res://src/ui/main_screen/game_ui.gd" id="1_mj8uy"]
 [ext_resource type="PackedScene" uid="uid://cumtr8ohypw6f" path="res://src/ui/character/character_ui.tscn" id="2_3rlp6"]
 [ext_resource type="Script" uid="uid://c6prsca8xgap" path="res://src/ui/main_screen/custom_progress_bar.gd" id="2_mj8uy"]
 [ext_resource type="Texture2D" uid="uid://dpfb0tfekq2m4" path="res://assets/background.png" id="2_o1vnd"]
 [ext_resource type="Texture2D" uid="uid://bd6dbacoa1xmy" path="res://assets/buttons/heaven_button.png" id="3_k556n"]
-[ext_resource type="Shader" uid="uid://bvthamc2x7ibt" path="res://src/ui/main_screen/heaven_button.gdshader" id="3_vvqxr"]
+[ext_resource type="Shader" uid="uid://bvthamc2x7ibt" path="res://src/ui/main_screen/outline_pixel.gdshader" id="3_vvqxr"]
 [ext_resource type="Script" uid="uid://jdng4kd4qh4v" path="res://src/ui/main_screen/replay_button.gd" id="4_cc1gc"]
+[ext_resource type="Texture2D" uid="uid://bn4ykonsalmeg" path="res://assets/buttons/hell_button_grayscale.png" id="5_c1l1k"]
+[ext_resource type="Texture2D" uid="uid://dedqubjon02tt" path="res://assets/buttons/heaven_button_grayscale.png" id="5_g4sju"]
 [ext_resource type="Script" uid="uid://ct67s4cuuv7fc" path="res://src/ui/main_screen/heaven_button.gd" id="5_imge8"]
+[ext_resource type="Texture2D" uid="uid://c6o3bklnira2t" path="res://assets/buttons/hell_button.png" id="6_w7w37"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vvqxr"]
 shader = ExtResource("3_vvqxr")
@@ -15,7 +18,11 @@ shader_parameter/clr = Color(0, 0, 0, 1)
 shader_parameter/type = 1
 shader_parameter/thickness = 10.0
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cc1gc"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w7w37"]
+shader = ExtResource("3_vvqxr")
+shader_parameter/clr = Color(0, 0, 0, 1)
+shader_parameter/type = 1
+shader_parameter/thickness = 10.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d2rst"]
 bg_color = Color(0.913725, 0, 0, 1)
@@ -67,6 +74,7 @@ offset_bottom = 1032.0
 pivot_offset = Vector2(257, 138)
 size_flags_horizontal = 3
 texture_normal = ExtResource("3_k556n")
+texture_disabled = ExtResource("5_g4sju")
 ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("5_imge8")
@@ -89,18 +97,37 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 60
 text = "Heaven"
 
-[node name="HellButton" type="Button" parent="."]
+[node name="HellButton" type="TextureButton" parent="."]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_w7w37")
 layout_mode = 2
-offset_left = 1059.0
-offset_top = 786.0
-offset_right = 1593.0
-offset_bottom = 995.0
+offset_left = 1012.0
+offset_top = 738.0
+offset_right = 1618.0
+offset_bottom = 1055.0
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 40
-theme_override_styles/focus = SubResource("StyleBoxEmpty_cc1gc")
-text = "Hell
-"
+texture_normal = ExtResource("6_w7w37")
+texture_disabled = ExtResource("5_c1l1k")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="HellButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -8.0
+offset_right = 20.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "Hell"
 
 [node name="HellProgress" type="VBoxContainer" parent="."]
 layout_mode = 0
