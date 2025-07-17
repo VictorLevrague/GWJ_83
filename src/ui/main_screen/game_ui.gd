@@ -31,10 +31,13 @@ func victory():
 func defeat():
     %DefeatLayer.show()
 
-func enable_next_character_call() -> void:
-    %NextCharacterButton.disabled = false
+func disable_buttons() -> void:
     %HeavenButton.disabled = true
     %HellButton.disabled = true
+
+func enable_next_character_call() -> void:
+    if not %VictoryLayer.visible: #Hack
+        %NextCharacterButton.disabled = false
     %CharacterUI.clear_action_containers()
 
 func _on_next_character_button_pressed() -> void:
