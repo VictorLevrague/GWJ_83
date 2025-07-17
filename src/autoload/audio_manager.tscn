@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bav7nai4tyke7"]
+
+[ext_resource type="AudioStream" uid="uid://ud20pt5fk044" path="res://assets/sound_effects/burning.wav" id="1_s7fu5"]
+[ext_resource type="AudioStream" uid="uid://dw1dvrikjd11k" path="res://assets/sound_effects/heaven.wav" id="2_c5aou"]
+
+[node name="AudioManager" type="Node"]
+
+[node name="Burning" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("1_s7fu5")
+
+[node name="Heaven" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_c5aou")
