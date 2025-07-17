@@ -23,7 +23,7 @@ func hell_animation() -> void:
     await %CharacterUI.hell_animation()
 
 func heaven_animation() -> void:
-    pass
+    await %CharacterUI.heaven_animation()
 
 func victory():
     %VictoryLayer.show()

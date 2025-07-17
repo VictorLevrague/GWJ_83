@@ -26,12 +26,24 @@ func hell_animation() -> void:
     %Texture.material.set("shader_parameter/burn_color_gradient", load("res://assets/for_shaders/burn_gradient_1d.tres"))
     %Texture.material.set("shader_parameter/dissolve_threshold", 1.)
     var burn_tween = burn_tween()
+    AudioManager.get_node("%Burning").play()
     await burn_tween.finished
-    
+
+func heaven_animation() -> void:
+    %Texture.material.set("shader", load("res://src/shaders/halo.gdshader"))
+    %Texture.material.set("shader_parameter/size", 0.)
+    var halo_tween = halo_tween()
+    AudioManager.get_node("%Heaven").play()
+    await halo_tween.finished
 
 func burn_tween() -> Tween:
     var tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
-    tween.tween_property(%Texture.material, "shader_parameter/dissolve_threshold", 0, 1.)
+    tween.tween_property(%Texture.material, "shader_parameter/dissolve_threshold", 0, 2.13)
+    return tween
+
+func halo_tween() -> Tween:
+    var tween = get_tree().create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+    tween.tween_property(%Texture.material, "shader_parameter/size", 5., 2.13)
     return tween
 
 func clear(container: Container):
