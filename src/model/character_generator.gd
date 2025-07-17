@@ -28,4 +28,7 @@ func load_character_illustrations() -> Array:
             if '.png.remap' in file_name: #for game export, because files extension are changed
                 file_name = file_name.trim_suffix('.remap')
             illustrations.append(ResourceLoader.load(folder_path + file_name)) 
+        elif '.import' in file_name:
+            file_name = file_name.trim_suffix('.import')
+            illustrations.append(ResourceLoader.load(folder_path + file_name)) 
     return illustrations

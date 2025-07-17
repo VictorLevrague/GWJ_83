@@ -1,0 +1,191 @@
+[gd_scene load_steps=13 format=3 uid="uid://cv7nguxlqdmhh"]
+
+[ext_resource type="Texture2D" uid="uid://dpfb0tfekq2m4" path="res://assets/background.png" id="1_u7epu"]
+[ext_resource type="Shader" uid="uid://c7c2cu7m34f0w" path="res://src/shaders/background_fire.gdshader" id="2_0t3wg"]
+[ext_resource type="Texture2D" uid="uid://vaat28dhqmwl" path="res://assets/for_shaders/centered_noise.tres" id="3_24334"]
+[ext_resource type="Shader" uid="uid://bvthamc2x7ibt" path="res://src/ui/main_screen/outline_pixel.gdshader" id="4_dikq3"]
+[ext_resource type="Texture2D" uid="uid://444nenrw566a" path="res://assets/buttons/hell_button_hover_main_screen.png" id="5_24334"]
+[ext_resource type="Texture2D" uid="uid://c6o3bklnira2t" path="res://assets/buttons/hell_button.png" id="5_bndtn"]
+[ext_resource type="Script" uid="uid://d3rxreoy0us3" path="res://src/ui/main_screen/change_scene_button.gd" id="6_0t3wg"]
+[ext_resource type="PackedScene" uid="uid://cj6vjfyw10nnh" path="res://src/model/game_manager.tscn" id="7_24334"]
+[ext_resource type="Script" uid="uid://do2lcljd40d2n" path="res://src/ui/main_screen/tutorial_button.gd" id="7_f4t3c"]
+[ext_resource type="StyleBox" uid="uid://didhwndqt1b3n" path="res://src/ui/character/action_panel.tres" id="9_bndtn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f4t3c"]
+shader = ExtResource("2_0t3wg")
+shader_parameter/noise_tex = ExtResource("3_24334")
+shader_parameter/bottom_color = Color(0, 0.7, 1, 1)
+shader_parameter/middle_color = Color(1, 0.5, 0, 1)
+shader_parameter/top_color = Color(1, 0.03, 0.001, 1)
+shader_parameter/fire_alpha = 0.244
+shader_parameter/fire_speed = Vector2(0, 1)
+shader_parameter/fire_aperture = 0.98
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aeydw"]
+shader = ExtResource("4_dikq3")
+shader_parameter/clr = Color(0, 0, 0, 1)
+shader_parameter/type = 2
+shader_parameter/thickness = 10.0
+
+[node name="MainScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.694118)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_u7epu")
+expand_mode = 1
+
+[node name="FireEffect" type="ColorRect" parent="Background"]
+material = SubResource("ShaderMaterial_f4t3c")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -678.5
+offset_top = 55.0
+offset_right = 681.5
+offset_bottom = 206.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 150
+text = "Make them go to hell"
+
+[node name="TutorialButton" type="TextureButton" parent="."]
+material = SubResource("ShaderMaterial_aeydw")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -520.0
+offset_top = -205.0
+offset_right = 492.0
+offset_bottom = 220.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("5_bndtn")
+texture_hover = ExtResource("5_24334")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("7_f4t3c")
+
+[node name="ButtonLabel" type="Label" parent="TutorialButton"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -409.5
+offset_top = -31.0
+offset_right = 408.5
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.257112, 0.257112, 0.257112, 1)
+theme_override_font_sizes/font_size = 100
+text = "Judge"
+horizontal_alignment = 1
+
+[node name="Explanations" type="Panel" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -858.0
+offset_top = -322.0
+offset_right = 857.0
+offset_bottom = 439.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("9_bndtn")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Explanations"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 45.0
+offset_top = 47.0
+offset_right = -55.0
+offset_bottom = -102.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/italics_font_size = 60
+theme_override_font_sizes/normal_font_size = 60
+bbcode_enabled = true
+text = "You are employed by the devil to infiltrate the purgatory.
+
+Send a maximum of people to hell to meet the devil's requirements. But don't make it too obvious or you'll get caught by the judge of judges.
+
+[i]Caution: The more your cover is compromised, the more the judges will be suspicious.[/i]"
+
+[node name="JudgeButton" type="TextureButton" parent="Explanations"]
+material = SubResource("ShaderMaterial_aeydw")
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -744.0
+offset_top = -313.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("5_bndtn")
+texture_hover = ExtResource("5_24334")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("6_0t3wg")
+next_scene = ExtResource("7_24334")
+
+[node name="ButtonLabel" type="Label" parent="Explanations/JudgeButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -409.5
+offset_top = -31.0
+offset_right = 408.5
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.257112, 0.257112, 0.257112, 1)
+theme_override_font_sizes/font_size = 90
+text = "Judge"
+horizontal_alignment = 1
+
+[connection signal="mouse_entered" from="TutorialButton" to="TutorialButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="TutorialButton" to="TutorialButton" method="_on_mouse_exited"]
+[connection signal="pressed" from="TutorialButton" to="TutorialButton" method="_on_pressed"]
+[connection signal="mouse_entered" from="Explanations/JudgeButton" to="Explanations/JudgeButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Explanations/JudgeButton" to="Explanations/JudgeButton" method="_on_mouse_exited"]
+[connection signal="pressed" from="Explanations/JudgeButton" to="Explanations/JudgeButton" method="_on_pressed"]

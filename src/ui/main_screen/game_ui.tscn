@@ -58,10 +58,10 @@ offset_bottom = -69.0
 [node name="HellButtonContainer" parent="." instance=ExtResource("4_2kjp8")]
 unique_name_in_owner = true
 layout_mode = 1
-offset_left = 858.0
-offset_top = 580.0
-offset_right = -58.0
-offset_bottom = 87.0
+offset_left = 1059.0
+offset_top = 738.0
+offset_right = -191.0
+offset_bottom = -85.0
 
 [node name="HellProgress" type="VBoxContainer" parent="."]
 layout_mode = 0

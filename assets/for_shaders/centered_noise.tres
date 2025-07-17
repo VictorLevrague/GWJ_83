@@ -2,10 +2,12 @@
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_qng1f"]
 noise_type = 5
-frequency = 0.0034
+frequency = 0.0256
 offset = Vector3(-42.86, 0, 0)
 fractal_lacunarity = 4.0
 fractal_gain = 0.3
 
 [resource]
+width = 1024
+height = 1024
 noise = SubResource("FastNoiseLite_qng1f")
