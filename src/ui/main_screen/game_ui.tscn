@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cp2lph3fek53m"]
+[gd_scene load_steps=18 format=3 uid="uid://cp2lph3fek53m"]
 
 [ext_resource type="Script" uid="uid://clagwd32ypgph" path="res://src/ui/main_screen/game_ui.gd" id="1_mj8uy"]
 [ext_resource type="PackedScene" uid="uid://cumtr8ohypw6f" path="res://src/ui/character/character_ui.tscn" id="2_3rlp6"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dedqubjon02tt" path="res://assets/buttons/heaven_button_grayscale.png" id="5_g4sju"]
 [ext_resource type="Script" uid="uid://ct67s4cuuv7fc" path="res://src/ui/main_screen/heaven_button.gd" id="5_imge8"]
 [ext_resource type="Texture2D" uid="uid://c6o3bklnira2t" path="res://assets/buttons/hell_button.png" id="6_w7w37"]
+[ext_resource type="Script" uid="uid://c3hx2vk1dqbri" path="res://src/ui/main_screen/hell_button.gd" id="9_2kjp8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vvqxr"]
 shader = ExtResource("3_vvqxr")
@@ -105,11 +106,13 @@ offset_left = 1012.0
 offset_top = 738.0
 offset_right = 1618.0
 offset_bottom = 1055.0
+pivot_offset = Vector2(303, 158)
 size_flags_horizontal = 3
 texture_normal = ExtResource("6_w7w37")
 texture_disabled = ExtResource("5_c1l1k")
 ignore_texture_size = true
 stretch_mode = 0
+script = ExtResource("9_2kjp8")
 
 [node name="Label" type="Label" parent="HellButton"]
 layout_mode = 1
@@ -326,6 +329,9 @@ Judgement"
 [connection signal="mouse_entered" from="HeavenButton" to="HeavenButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="HeavenButton" to="HeavenButton" method="_on_mouse_exited"]
 [connection signal="pressed" from="HeavenButton" to="HeavenButton" method="_on_pressed"]
+[connection signal="mouse_entered" from="HellButton" to="HellButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="HellButton" to="HellButton" method="_on_mouse_exited"]
+[connection signal="pressed" from="HellButton" to="HellButton" method="_on_pressed"]
 [connection signal="pressed" from="VictoryLayer/Panel/VBoxContainer/ReplayButton" to="VictoryLayer/Panel/VBoxContainer/ReplayButton" method="_on_pressed"]
 [connection signal="pressed" from="DefeatLayer/Panel/VBoxContainer/ReplayButton" to="DefeatLayer/Panel/VBoxContainer/ReplayButton" method="_on_pressed"]
 [connection signal="pressed" from="NextCharacterButton" to="." method="_on_next_character_button_pressed"]
