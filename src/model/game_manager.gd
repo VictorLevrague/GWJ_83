@@ -1,8 +1,5 @@
 extends Node
 
-var HELL_COMPLETION_RATE := 0.5
-var COVER_DEPLETION_RATE := 0.8
-
 var current_character: Character:
     set(value):
         current_character = value
@@ -20,42 +17,53 @@ var cover_percentage: float = 100.:
         await %GameUI.update_progress_bar("cover", cover_percentage)
         if cover_percentage <= 0.:
             defeat()
-        detection_threshold *= cover_percentage/100 * 2 #2 is magic number
 var detection_threshold: float = 20.
-var possible_characters: Array[Character] = []
+
+var character_generator: CharacterGenerator = CharacterGenerator.new()
 
 func _ready() -> void:
     Signals.send_to_heaven.connect(Callable(self, "on_heaven_decision"))
     Signals.send_to_hell.connect(Callable(self, "on_hell_decision"))
     Signals.next_character.connect(Callable(self, "enter_next_character"))
-    load_characters()
-    current_character = load("res://src/resources/characters/char_test_above.tres")
-
-func load_characters():
-    var characters_folder_path = "res://src/resources/characters/"
-    for file_name in DirAccess.get_files_at(characters_folder_path):
-        if '.tres.remap' in file_name: #for game export, because files extension are changed
-            file_name = file_name.trim_suffix('.remap')
-        possible_characters.append(ResourceLoader.load(characters_folder_path + file_name)) 
+    current_character = character_generator.create_character()
 
 func on_heaven_decision():
-    %GameUI.heaven_animation()
+    %GameUI.disable_buttons()
+    await %GameUI.heaven_animation()
     %GameUI.enable_next_character_call()
 
 func on_hell_decision():
         if current_character:
-            cover_percentage -= current_character.compute_sum_action_values() * COVER_DEPLETION_RATE if current_character.compute_sum_action_values() > detection_threshold else 0
-            hell_completion += current_character.compute_sum_action_values() * HELL_COMPLETION_RATE
+            print("cover: ", cover_percentage)
+            print("threshold: ", detection_threshold)
+            print("cover loss: ", convert_action_value_to_cover_completion(current_character.compute_sum_action_values(), detection_threshold))
+            cover_percentage -= convert_action_value_to_cover_completion(current_character.compute_sum_action_values(), detection_threshold)
+            hell_completion += convert_action_value_to_hell_completion(current_character.compute_sum_action_values())
+            print("current_character.compute_sum_action_values(): ", current_character.compute_sum_action_values())
+            %GameUI.disable_buttons()
             await %GameUI.hell_animation()
             %GameUI.enable_next_character_call()
         else:
             push_warning("Character not attributed")
 
 func enter_next_character():
-    current_character = possible_characters[randi_range(0, len(possible_characters) - 1)]
+    current_character = character_generator.create_character()
 
 func victory() -> void:
     %GameUI.victory()
 
 func defeat() -> void:
     %GameUI.defeat()
+
+func convert_action_value_to_hell_completion(value: float) -> float:
+    const VALUE_AT_ORIGIN_BEFORE_ATTENAUTION := 50.
+    const SPREAD := 100.
+    const HEIGHT = 40.
+    const ATTENUATION = 0.4
+    return ATTENUATION * (VALUE_AT_ORIGIN_BEFORE_ATTENAUTION + HEIGHT * tanh(value/SPREAD))
+
+func convert_action_value_to_cover_completion(value: float, threshold: float) -> float:
+    #For now, you're not punished for letting bad people to heaven (would be with a timer ?)
+    #Use sigmoid for bound ?
+    const STEEPNESS = 0.6
+    return max(0, (value - threshold) * STEEPNESS)

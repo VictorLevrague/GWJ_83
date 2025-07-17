@@ -17,3 +17,19 @@ func compute_sum_action_values() -> float:
 
 func sum_array(array: Array) -> float:
     return array.reduce(func(accum, number): return accum + number, 0)
+
+func add_actions(type: String, nb_actions: int):
+    var actions_pool: Array[Action]
+    var output_action_array: Array[Action]
+    match type:
+        "Positive":
+            actions_pool = ActionLibrary.positive_action_pool.duplicate()
+            output_action_array = positive_actions
+        "Negative":
+            actions_pool = ActionLibrary.negative_action_pool.duplicate()
+            output_action_array = negative_actions
+    actions_pool.shuffle()
+    if len(actions_pool) >= nb_actions:
+        output_action_array.append_array(actions_pool.slice(0, nb_actions))
+    else:
+        output_action_array.append_array(actions_pool.slice(0, len(actions_pool)))
