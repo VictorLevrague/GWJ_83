@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddovwhner1gpo"
-path="res://.godot/imported/old_mammoth.png-339909e2a3ffc07b591c1e5352bd8f8c.ctex"
+uid="uid://biuol4netarcs"
+path="res://.godot/imported/character_1.png-850f440bf981e419619326f0fb65bb81.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/character_illustrations/old_mammoth.png"
-dest_files=["res://.godot/imported/old_mammoth.png-339909e2a3ffc07b591c1e5352bd8f8c.ctex"]
+source_file="res://assets/character_illustrations/character_1.png"
+dest_files=["res://.godot/imported/character_1.png-850f440bf981e419619326f0fb65bb81.ctex"]
 
 [params]
 
