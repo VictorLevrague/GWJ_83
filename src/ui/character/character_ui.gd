@@ -5,6 +5,7 @@ var character: Character:
         character = value
         if character:
             %Texture.texture = character.illustration
+            %Texture.modulate.a = 1 #Big hack to solve shader issue
             %Texture.material = ShaderMaterial.new()
             fill_actions_container(%PositiveActionsContainer, character.positive_actions, Color(0.498039, 1, 0, 1))
             fill_actions_container(%NegativeActionsContainer, character.negative_actions, Color(1, 0, 0, 1))
@@ -35,6 +36,7 @@ func heaven_animation() -> void:
     var halo_tween = halo_tween()
     AudioManager.get_node("%Heaven").play()
     await halo_tween.finished
+    %Texture.modulate.a = 0 #Big hack to solve shader issue
 
 func burn_tween() -> Tween:
     var tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
