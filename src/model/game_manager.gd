@@ -19,6 +19,8 @@ var cover_percentage: float = 100.:
             defeat()
 var detection_threshold: float = 20.
 
+var nb_persons_to_hell_to_complete_level: int = 10
+
 var character_generator: CharacterGenerator = CharacterGenerator.new()
 
 func _ready() -> void:
@@ -33,21 +35,20 @@ func on_heaven_decision():
     %GameUI.enable_next_character_call()
 
 func on_hell_decision():
-        if current_character:
-            var total_action_value := current_character.compute_sum_action_values()
-            print("cover: ", cover_percentage)
-            print("threshold: ", detection_threshold)
-            print("cover loss: ", convert_action_value_to_cover_completion(total_action_value, detection_threshold))
-            cover_percentage -= convert_action_value_to_cover_completion(total_action_value, detection_threshold)
-            hell_completion += convert_action_value_to_hell_completion(total_action_value)
-            print("current_character.compute_sum_action_values(): ", total_action_value)
-            detection_threshold = max(0, detection_threshold - convert_action_value_to_detection_threshold_loss(total_action_value))
-            print("new detection_threshold: ", detection_threshold)
-            %GameUI.disable_buttons()
-            await %GameUI.hell_animation()
-            %GameUI.enable_next_character_call()
-        else:
-            push_warning("Character not attributed")
+    if current_character:
+        modify_player_values()
+        %GameUI.disable_buttons()
+        await %GameUI.hell_animation()
+        %GameUI.enable_next_character_call()
+    else:
+        push_warning("Character not attributed")
+
+func modify_player_values():
+    var total_action_value := current_character.compute_sum_action_values()
+    cover_percentage -= convert_action_value_to_cover_completion(total_action_value, detection_threshold)
+    #hell_completion += convert_action_value_to_hell_completion(total_action_value)
+    hell_completion += 100/nb_persons_to_hell_to_complete_level
+    detection_threshold = max(0, detection_threshold - convert_action_value_to_detection_threshold_loss(total_action_value))
 
 func enter_next_character():
     current_character = character_generator.create_character()
