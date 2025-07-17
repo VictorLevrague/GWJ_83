@@ -12,12 +12,13 @@ first_music = ExtResource("2_auov6")
 [node name="Burning" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("1_s7fu5")
-volume_db = 5.012
+volume_db = -1.868
 
 [node name="Heaven" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("2_c5aou")
-volume_db = -9.606
+volume_db = -18.377
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+volume_db = -10.521
