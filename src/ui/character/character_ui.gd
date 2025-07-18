@@ -22,6 +22,7 @@ func entering_animation():
     tween.tween_property(%Texture, "modulate:a", 1.0, 1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
     tween.tween_property(%Texture, "scale", Vector2(1, 1), 1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
     tween.tween_property(%Texture, "position:y", original_y, 0.8)
+    AudioManager.get_node("%Footstep").play()
 
 func fill_actions_container(container: Container, actions: Array[Action], color: Color):
     clear(container)
@@ -57,12 +58,12 @@ func heaven_animation() -> void:
 
 func burn_tween() -> Tween:
     var tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
-    tween.tween_property(%Texture.material, "shader_parameter/dissolve_threshold", 0, 2.13)
+    tween.tween_property(%Texture.material, "shader_parameter/dissolve_threshold", 0, 1.8)
     return tween
 
 func halo_tween() -> Tween:
     var tween = get_tree().create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-    tween.tween_property(%Texture.material, "shader_parameter/size", 5., 2.13)
+    tween.tween_property(%Texture.material, "shader_parameter/size", 5., 1.8)
     return tween
 
 func clear(container: Container):
