@@ -1,0 +1,95 @@
+[gd_scene load_steps=4 format=3 uid="uid://ct1vpo7esd1h5"]
+
+[ext_resource type="StyleBox" uid="uid://didhwndqt1b3n" path="res://src/ui/character/action_panel.tres" id="1_7cjl6"]
+[ext_resource type="Script" uid="uid://cailn5oy2kjr0" path="res://src/ui/music_slider.gd" id="2_3xaf8"]
+[ext_resource type="Script" uid="uid://bjxs4bsn82cg8" path="res://src/ui/sfx_slider.gd" id="3_pnssi"]
+
+[node name="Options" type="Panel"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -858.0
+offset_top = -322.0
+offset_right = 857.0
+offset_bottom = 439.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_7cjl6")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 45.0
+offset_top = 47.0
+offset_right = -55.0
+offset_bottom = -597.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/italics_font_size = 60
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "[center]Options:[/center]"
+
+[node name="MusicContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -756.5
+offset_top = -111.974
+offset_right = 756.5
+offset_bottom = 34.0257
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 30
+
+[node name="Label" type="Label" parent="MusicContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 80
+text = "Music volume: "
+horizontal_alignment = 1
+
+[node name="MusicSlider" type="HSlider" parent="MusicContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+rounded = true
+script = ExtResource("2_3xaf8")
+
+[node name="SFXContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -756.5
+offset_top = 91.3959
+offset_right = 756.5
+offset_bottom = 237.396
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="Label" type="Label" parent="SFXContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 80
+text = "Sfx volume: "
+horizontal_alignment = 1
+
+[node name="SfxSlider" type="HSlider" parent="SFXContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+rounded = true
+ticks_on_borders = true
+script = ExtResource("3_pnssi")
+
+[connection signal="value_changed" from="MusicContainer/MusicSlider" to="MusicContainer/MusicSlider" method="_on_value_changed"]
