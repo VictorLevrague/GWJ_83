@@ -9,8 +9,6 @@ var hell_completion: float = 0.:
         hell_completion = value
         if cover_percentage > 0.:
             await %GameUI.update_progress_bar("hell", hell_completion)
-            if hell_completion >= 100.:
-                victory()
 var cover_percentage: float = 100.:
     set(value):
         cover_percentage = value
@@ -19,9 +17,11 @@ var cover_percentage: float = 100.:
             defeat()
 var detection_threshold: float = 20.
 
-var nb_persons_to_hell_to_complete_level: int = 7
+var nb_persons_to_hell_to_complete_level: int = 2
 var total_nb_persons_to_judge: int = 10
-var nb_persons_judged: int = 0
+var nb_persons_judged: int = -1
+
+var current_level = 0
 
 var character_generator: CharacterGenerator = CharacterGenerator.new()
 
@@ -29,20 +29,28 @@ func _ready() -> void:
     Signals.send_to_heaven.connect(Callable(self, "on_heaven_decision"))
     Signals.send_to_hell.connect(Callable(self, "on_hell_decision"))
     Signals.next_character.connect(Callable(self, "enter_next_character"))
+    Signals.next_level.connect(Callable(self, "next_level"))
+    next_level()
     %GameUI.update_people_to_judge_label(nb_persons_judged, total_nb_persons_to_judge)
-    current_character = character_generator.create_character()
+
+func are_people_left_to_judge():
+    return (total_nb_persons_to_judge - nb_persons_judged) > 0
 
 func on_heaven_decision():
     %GameUI.disable_buttons()
     await %GameUI.heaven_animation()
-    %GameUI.enable_next_character_call()
+    if are_people_left_to_judge():
+        %GameUI.enable_next_character_call()
 
 func on_hell_decision():
     if current_character:
         modify_player_values()
         %GameUI.disable_buttons()
         await %GameUI.hell_animation()
-        %GameUI.enable_next_character_call()
+        if hell_completion >= 100.:
+            victory()
+        if are_people_left_to_judge():
+            %GameUI.enable_next_character_call()
     else:
         push_warning("Character not attributed")
 
@@ -51,21 +59,29 @@ func modify_player_values():
     cover_percentage -= convert_action_value_to_cover_completion(total_action_value, detection_threshold)
     #hell_completion += convert_action_value_to_hell_completion(total_action_value)
     hell_completion += 100/nb_persons_to_hell_to_complete_level
+    #await set_hell_completion(hell_completion + 100 / nb_persons_to_hell_to_complete_level)
     detection_threshold = max(0, detection_threshold - convert_action_value_to_detection_threshold_loss(total_action_value))
 
 func enter_next_character():
     nb_persons_judged += 1
     %GameUI.update_people_to_judge_label(nb_persons_judged, total_nb_persons_to_judge)
-    if (total_nb_persons_to_judge - nb_persons_judged) > 0:
+    if are_people_left_to_judge():
         current_character = character_generator.create_character()
     else:
         defeat()
 
 func victory() -> void:
     %GameUI.victory()
+    %GameUI.get_node("%NextLevelLayer").show()
 
 func defeat() -> void:
     %GameUI.defeat()
+
+func next_level():
+    reset_level_stats()
+    current_level += 1
+    %GameUI.next_level(current_level)
+    %GameUI.enter_new_character()
 
 func convert_action_value_to_hell_completion(value: float) -> float:
     #tanh
@@ -88,3 +104,9 @@ func convert_action_value_to_detection_threshold_loss(value: float):
     const STEEPNESS := 0.18
     const X_SHIFT := 35.
     return MAXIMUM / (1 + exp(-STEEPNESS*(value - X_SHIFT)))
+
+func reset_level_stats():
+    nb_persons_judged = -1
+    hell_completion = 0
+    cover_percentage = 100
+    detection_threshold = 20
