@@ -24,7 +24,8 @@ func heaven_animation() -> void:
     await %CharacterUI.heaven_animation()
 
 func victory():
-    %VictoryLayer.show()
+    #%VictoryLayer.show()
+    %NextLevelLayer.show()
 
 func defeat():
     %DefeatLayer.show()
@@ -43,3 +44,8 @@ func _on_next_character_button_pressed() -> void:
     %NextCharacterButton.disabled = true
     %HeavenButtonContainer.enable_button()
     %HellButtonContainer.enable_button()
+
+func update_people_to_judge_label(nb_persons_judged: int, total_nb_persons_to_judge: int):
+    var nb_people_to_judge_label = %GameUI.get_node("%NbPeopleToJudgeLabel")
+    var base_string = "Number people to judge:\n%s /%s"
+    nb_people_to_judge_label.text = base_string % [str(total_nb_persons_to_judge - nb_persons_judged), str(total_nb_persons_to_judge)]

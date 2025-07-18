@@ -19,7 +19,9 @@ var cover_percentage: float = 100.:
             defeat()
 var detection_threshold: float = 20.
 
-var nb_persons_to_hell_to_complete_level: int = 10
+var nb_persons_to_hell_to_complete_level: int = 7
+var total_nb_persons_to_judge: int = 10
+var nb_persons_judged: int = 0
 
 var character_generator: CharacterGenerator = CharacterGenerator.new()
 
@@ -27,6 +29,7 @@ func _ready() -> void:
     Signals.send_to_heaven.connect(Callable(self, "on_heaven_decision"))
     Signals.send_to_hell.connect(Callable(self, "on_hell_decision"))
     Signals.next_character.connect(Callable(self, "enter_next_character"))
+    %GameUI.update_people_to_judge_label(nb_persons_judged, total_nb_persons_to_judge)
     current_character = character_generator.create_character()
 
 func on_heaven_decision():
@@ -51,7 +54,12 @@ func modify_player_values():
     detection_threshold = max(0, detection_threshold - convert_action_value_to_detection_threshold_loss(total_action_value))
 
 func enter_next_character():
-    current_character = character_generator.create_character()
+    nb_persons_judged += 1
+    %GameUI.update_people_to_judge_label(nb_persons_judged, total_nb_persons_to_judge)
+    if (total_nb_persons_to_judge - nb_persons_judged) > 0:
+        current_character = character_generator.create_character()
+    else:
+        defeat()
 
 func victory() -> void:
     %GameUI.victory()

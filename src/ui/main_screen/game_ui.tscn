@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cp2lph3fek53m"]
+[gd_scene load_steps=12 format=3 uid="uid://cp2lph3fek53m"]
 
 [ext_resource type="Script" uid="uid://clagwd32ypgph" path="res://src/ui/main_screen/game_ui.gd" id="1_mj8uy"]
 [ext_resource type="PackedScene" uid="uid://cumtr8ohypw6f" path="res://src/ui/character/character_ui.tscn" id="2_3rlp6"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://vci1o27g2pgt" path="res://src/ui/heaven_button_container.tscn" id="3_g4sju"]
 [ext_resource type="PackedScene" uid="uid://bw2ih1pk6v07x" path="res://src/ui/hell_button_container.tscn" id="4_2kjp8"]
 [ext_resource type="Script" uid="uid://jdng4kd4qh4v" path="res://src/ui/main_screen/replay_button.gd" id="4_cc1gc"]
+[ext_resource type="StyleBox" uid="uid://didhwndqt1b3n" path="res://src/ui/character/action_panel.tres" id="8_imge8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d2rst"]
 bg_color = Color(0.913725, 0, 0, 1)
@@ -257,6 +258,79 @@ theme_override_font_sizes/font_size = 40
 text = "Next
 Judgement"
 
+[node name="NbPeopleToJudgePanel" type="Panel" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -183.0
+offset_top = 44.0
+offset_right = 172.0
+offset_bottom = 214.0
+grow_horizontal = 2
+theme_override_styles/panel = ExtResource("8_imge8")
+
+[node name="NbPeopleToJudgeLabel" type="RichTextLabel" parent="NbPeopleToJudgePanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 21.0
+offset_top = 23.0
+offset_right = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 40
+fit_content = true
+horizontal_alignment = 1
+
+[node name="NextLevelLayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+visible = false
+
+[node name="Panel" type="Panel" parent="NextLevelLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -843.0
+offset_top = -329.144
+offset_right = 843.0
+offset_bottom = 514.856
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_o1vnd")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NextLevelLayer/Panel"]
+layout_mode = 0
+offset_left = 111.0
+offset_top = 115.0
+offset_right = 1576.0
+offset_bottom = 784.0
+theme_override_constants/separation = 60
+
+[node name="NextLevelLabel" type="Label" parent="NextLevelLayer/Panel/VBoxContainer"]
+unique_name_in_owner = true
+modulate = Color(0.0562945, 0.00369703, 0.108891, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "You consumed enough souls to please me.
+
+You're my best secret agent, you know ?
+
+Continue like that"
+
+[node name="ReplayButton" type="Button" parent="NextLevelLayer/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 80
+text = "Next day"
+script = ExtResource("4_cc1gc")
+
 [connection signal="pressed" from="VictoryLayer/Panel/VBoxContainer/ReplayButton" to="VictoryLayer/Panel/VBoxContainer/ReplayButton" method="_on_pressed"]
 [connection signal="pressed" from="DefeatLayer/Panel/VBoxContainer/ReplayButton" to="DefeatLayer/Panel/VBoxContainer/ReplayButton" method="_on_pressed"]
 [connection signal="pressed" from="NextCharacterButton" to="." method="_on_next_character_button_pressed"]
+[connection signal="pressed" from="NextLevelLayer/Panel/VBoxContainer/ReplayButton" to="NextLevelLayer/Panel/VBoxContainer/ReplayButton" method="_on_pressed"]
