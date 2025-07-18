@@ -7,6 +7,7 @@ var character: Character:
 
 func _ready() -> void:
     %NextCharacterButton.disabled = true
+    %RulesLayer.show()
 
 func update_progress_bar(name_progress_bar: String, value: float):
     var progress_bar: ProgressBar

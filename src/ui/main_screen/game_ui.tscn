@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cp2lph3fek53m"]
+[gd_scene load_steps=13 format=3 uid="uid://cp2lph3fek53m"]
 
 [ext_resource type="Script" uid="uid://clagwd32ypgph" path="res://src/ui/main_screen/game_ui.gd" id="1_mj8uy"]
 [ext_resource type="PackedScene" uid="uid://cumtr8ohypw6f" path="res://src/ui/character/character_ui.tscn" id="2_3rlp6"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bw2ih1pk6v07x" path="res://src/ui/hell_button_container.tscn" id="4_2kjp8"]
 [ext_resource type="Script" uid="uid://jdng4kd4qh4v" path="res://src/ui/main_screen/replay_button.gd" id="4_cc1gc"]
 [ext_resource type="StyleBox" uid="uid://didhwndqt1b3n" path="res://src/ui/character/action_panel.tres" id="8_imge8"]
+[ext_resource type="Script" uid="uid://eu30kudllccc" path="res://src/ui/main_screen/rules_layer.gd" id="9_w7w37"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d2rst"]
 bg_color = Color(0.913725, 0, 0, 1)
@@ -330,7 +331,65 @@ theme_override_font_sizes/font_size = 80
 text = "Next day"
 script = ExtResource("4_cc1gc")
 
+[node name="RulesLayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+visible = false
+script = ExtResource("9_w7w37")
+
+[node name="RulesPanel" type="Panel" parent="RulesLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -767.0
+offset_top = -464.0
+offset_right = 767.0
+offset_bottom = 465.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("8_imge8")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="RulesLayer/RulesPanel"]
+modulate = Color(0.0104851, 0.0104851, 0.0104851, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 85.0
+offset_top = 60.0
+offset_right = -85.0
+offset_bottom = -59.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 60
+theme_override_font_sizes/bold_font_size = 60
+bbcode_enabled = true
+text = "[center]Rules of the purgatory:[/center]
+
+∘ Judge people fairly based on the weight of their actions
+∘ Tremendously positive and negative actions must lead to Heaven or Hell, respectively.
+∘ Positive and negative action lists may have been mixed
+"
+
+[node name="RulesButton" type="Button" parent="RulesLayer/RulesPanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -340.441
+offset_top = -235.0
+offset_right = 350.559
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 60
+text = "Understood"
+
 [connection signal="pressed" from="VictoryLayer/Panel/VBoxContainer/ReplayButton" to="VictoryLayer/Panel/VBoxContainer/ReplayButton" method="_on_pressed"]
 [connection signal="pressed" from="DefeatLayer/Panel/VBoxContainer/ReplayButton" to="DefeatLayer/Panel/VBoxContainer/ReplayButton" method="_on_pressed"]
 [connection signal="pressed" from="NextCharacterButton" to="." method="_on_next_character_button_pressed"]
 [connection signal="pressed" from="NextLevelLayer/Panel/VBoxContainer/ReplayButton" to="NextLevelLayer/Panel/VBoxContainer/ReplayButton" method="_on_pressed"]
+[connection signal="pressed" from="RulesLayer/RulesPanel/RulesButton" to="RulesLayer" method="_on_rules_button_pressed"]
