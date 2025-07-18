@@ -23,6 +23,8 @@ var nb_persons_judged: int = -1
 var max_positive_actions_per_character = 2
 var max_negative_actions_per_character = 2
 var max_wrongly_positioned_actions_per_character = 0
+var cover_loss_multiplier = 0.8
+var maximum_cover_loss = 80
 
 var current_level = 0
 
@@ -60,7 +62,10 @@ func on_hell_decision():
 func modify_player_values():
     var total_action_value := current_character.compute_sum_action_values()
     print("total_action_value: ", total_action_value)
-    cover_percentage -= convert_action_value_to_cover_completion(total_action_value, detection_threshold)
+    var cover_loss = convert_action_value_to_cover_completion(total_action_value, detection_threshold, cover_loss_multiplier)
+    if cover_loss > maximum_cover_loss:
+        cover_loss = maximum_cover_loss
+    cover_percentage -= cover_loss
     #hell_completion += convert_action_value_to_hell_completion(total_action_value)
     hell_completion += 100/nb_persons_to_hell_to_complete_level
     #await set_hell_completion(hell_completion + 100 / nb_persons_to_hell_to_complete_level)
@@ -97,12 +102,11 @@ func convert_action_value_to_hell_completion(value: float) -> float:
     const ATTENUATION = 0.4
     return ATTENUATION * (VALUE_AT_ORIGIN_BEFORE_ATTENAUTION + HEIGHT * tanh(value/SPREAD))
 
-func convert_action_value_to_cover_completion(value: float, threshold: float) -> float:
+func convert_action_value_to_cover_completion(value: float, threshold: float, steepness: float) -> float:
     #ReLu (Rectified Linear Unit) function
     #For now, you're not punished for letting bad people to heaven (would be with a timer ?)
     #Use sigmoid for bound ?
-    const STEEPNESS = 0.6
-    return max(0, (value - threshold) * STEEPNESS)
+    return max(0, (value - threshold) * steepness)
 
 func convert_action_value_to_detection_threshold_loss(value: float):
     #Sigmoid
@@ -125,15 +129,21 @@ func update_level_characteristics(level: int):
             max_wrongly_positioned_actions_per_character = 0
             nb_persons_to_hell_to_complete_level = 7
             total_nb_persons_to_judge = 10
+            cover_loss_multiplier = 0.8
+            maximum_cover_loss = 80
         "2":
             max_positive_actions_per_character = 3
             max_negative_actions_per_character = 3
             max_wrongly_positioned_actions_per_character = 1
             nb_persons_to_hell_to_complete_level = 10
             total_nb_persons_to_judge = 15
+            cover_loss_multiplier = 0.9
+            maximum_cover_loss = 90
         "3":
             max_positive_actions_per_character = 3
             max_negative_actions_per_character = 3
             max_wrongly_positioned_actions_per_character = 1
             nb_persons_to_hell_to_complete_level = 10
             total_nb_persons_to_judge = 15
+            cover_loss_multiplier = 1.0
+            maximum_cover_loss = 100
