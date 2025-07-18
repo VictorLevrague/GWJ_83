@@ -2,22 +2,23 @@ extends Node
 
 class_name CharacterGenerator
 
-const RANGE_NB_POSITIVE_ACTIONS = 3
-const RANGE_NB_NEGATIVE_ACTIONS = 3
-
 var character_illustrations: Array
 
 func _init() -> void:
     character_illustrations = load_character_illustrations()
 
-func create_character():
-    var nb_positive_actions: int = randi_range(0, RANGE_NB_POSITIVE_ACTIONS)
-    var nb_negative_actions: int = randi_range(0, RANGE_NB_NEGATIVE_ACTIONS) if nb_positive_actions else randi_range(1, RANGE_NB_NEGATIVE_ACTIONS)
+func create_character(max_positive_actions: int, max_negative_actions: int, max_wrongly_positioned_actions: int):
+    var nb_positive_actions: int = randi_range(0, max_positive_actions)
+    var nb_negative_actions: int = randi_range(0, max_negative_actions) if nb_positive_actions else randi_range(1, max_negative_actions)
     var character = Character.new()
     character.label_name = ""
     character.illustration = character_illustrations[randi_range(0, len(character_illustrations) -1)]
     character.add_actions("Positive", nb_positive_actions)
     character.add_actions("Negative", nb_negative_actions)
+    var max_wrongly_positioned_positive = randi_range(0, max_wrongly_positioned_actions)
+    var max_wrongly_positioned_negative = randi_range(0, max_wrongly_positioned_actions)
+    character.add_actions("Positive", max_wrongly_positioned_positive, true)
+    character.add_actions("Negative", max_wrongly_positioned_negative, true)
     return character
 
 func load_character_illustrations() -> Array:

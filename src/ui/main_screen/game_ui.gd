@@ -56,7 +56,6 @@ func _on_next_character_button_pressed() -> void:
 
 func enter_new_character():
     Signals.emit_signal("next_character")
-    print("disabled")
     %NextCharacterButton.disabled = true
     enable_buttons()
 
