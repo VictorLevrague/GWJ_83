@@ -15,7 +15,7 @@ var cover_percentage: float = 100.:
         await %GameUI.update_progress_bar("cover", cover_percentage)
         if cover_percentage <= 0.:
             defeat()
-var detection_threshold: float = 20.
+var detection_threshold: float = 10.
 
 var nb_persons_to_hell_to_complete_level: int = 5
 var total_nb_persons_to_judge: int = 10
@@ -134,7 +134,6 @@ func update_level_characteristics(level: int):
         "2":
             max_positive_actions_per_character = 3
             max_negative_actions_per_character = 3
-            max_wrongly_positioned_actions_per_character = 1
             nb_persons_to_hell_to_complete_level = 10
             total_nb_persons_to_judge = 15
             cover_loss_multiplier = 0.9
