@@ -73,7 +73,7 @@ func next_level(level: int):
     
 
 func update_rules(level: int):
-    var rules: String = "[center]Rules of the purgatory (Day %s):\n[/center]" % [level]
+    var rules: String = "[center][color=red]Rules of the purgatory (Day %s):[/color][/center]\n" % [level]
     match str(level):
         "1":
             new_rules.append("\n∘ Judge people fairly based on the weight of their actions")
