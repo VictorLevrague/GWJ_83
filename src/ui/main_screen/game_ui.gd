@@ -37,8 +37,7 @@ func victory():
 
 func defeat():
     %DefeatLayer.show()
-    %NextCharacterButton.disabled = true #Not working
-    print("disabled")
+    %NextCharacterButton.disabled = true
 
 func disable_buttons() -> void:
     %HeavenButtonContainer.disable_button()
@@ -51,7 +50,6 @@ func enable_buttons() -> void:
 func enable_next_character_call() -> void:
     if not %NextLevelLayer.visible: #Hack
         %NextCharacterButton.disabled = false
-        print("enabled")
     %CharacterUI.clear_action_containers()
 
 func _on_next_character_button_pressed() -> void:
@@ -61,7 +59,6 @@ func enter_new_character():
     Signals.emit_signal("next_character")
     AudioManager.get_node("%Bell").play()
     %NextCharacterButton.disabled = true
-    print("disabled")
     enable_buttons()
 
 func update_people_to_judge_label(nb_persons_judged: int, total_nb_persons_to_judge: int):

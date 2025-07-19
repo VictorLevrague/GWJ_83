@@ -18,7 +18,7 @@ var detection_threshold: float = 10.
 
 var nb_persons_to_hell_to_complete_level: int = 5
 var total_nb_persons_to_judge: int = 10
-var nb_persons_judged: int = -1
+var nb_persons_judged: int = 0
 var max_positive_actions_per_character = 2
 var max_negative_actions_per_character = 2
 var max_wrongly_positioned_actions_per_character = 0
@@ -42,13 +42,19 @@ func are_people_left_to_judge():
     return (total_nb_persons_to_judge - nb_persons_judged) > 0
 
 func on_heaven_decision():
+    nb_persons_judged += 1
+    %GameUI.update_people_to_judge_label(nb_persons_judged, total_nb_persons_to_judge)
     %GameUI.disable_buttons()
     await %GameUI.heaven_animation()
     if are_people_left_to_judge():
         %GameUI.enable_next_character_call()
+    else:
+        defeat()
 
 func on_hell_decision():
     if current_character:
+        nb_persons_judged += 1
+        %GameUI.update_people_to_judge_label(nb_persons_judged, total_nb_persons_to_judge)
         modify_player_values()
         %GameUI.disable_buttons()
         await %GameUI.hell_animation()
@@ -59,6 +65,8 @@ func on_hell_decision():
             victory()
         if are_people_left_to_judge():
             %GameUI.enable_next_character_call()
+        else:
+            defeat()
     else:
         push_warning("Character not attributed")
 
@@ -74,8 +82,6 @@ func modify_player_values():
     detection_threshold = max(0, detection_threshold - convert_action_value_to_detection_threshold_loss(total_action_value))
 
 func enter_next_character():
-    nb_persons_judged += 1
-    %GameUI.update_people_to_judge_label(nb_persons_judged, total_nb_persons_to_judge)
     if are_people_left_to_judge():
         current_character = character_generator.create_character(max_positive_actions_per_character, max_negative_actions_per_character,
                                                                 max_wrongly_positioned_actions_per_character)
@@ -93,6 +99,7 @@ func next_level():
     reset_level_stats()
     current_level += 1
     update_level_characteristics(current_level)
+    %GameUI.update_people_to_judge_label(nb_persons_judged, total_nb_persons_to_judge)
     %GameUI.next_level(current_level)
     %GameUI.enter_new_character()
 
@@ -118,9 +125,8 @@ func convert_action_value_to_detection_threshold_loss(value: float):
     return MAXIMUM / (1 + exp(-STEEPNESS*(value - X_SHIFT)))
 
 func reset_level_stats():
-    nb_persons_judged = -1
+    nb_persons_judged = 0
     hell_completion = 0
-    print("hell_completion: ", hell_completion)
     cover_percentage = 100
     detection_threshold = 10
 
@@ -128,6 +134,7 @@ func reset_level_stats():
 func restart_level():
     %GameUI.get_node("%DefeatLayer").hide()
     reset_level_stats()
+    %GameUI.update_people_to_judge_label(nb_persons_judged, total_nb_persons_to_judge)
     %GameUI.enter_new_character()
     
 func update_level_characteristics(level: int):
