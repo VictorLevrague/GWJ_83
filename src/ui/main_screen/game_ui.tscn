@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cp2lph3fek53m"]
+[gd_scene load_steps=23 format=3 uid="uid://cp2lph3fek53m"]
 
 [ext_resource type="Script" uid="uid://clagwd32ypgph" path="res://src/ui/main_screen/game_ui.gd" id="1_mj8uy"]
 [ext_resource type="PackedScene" uid="uid://cumtr8ohypw6f" path="res://src/ui/character/character_ui.tscn" id="2_3rlp6"]
@@ -15,6 +15,9 @@
 [ext_resource type="Script" uid="uid://eu30kudllccc" path="res://src/ui/main_screen/rules_layer.gd" id="9_w7w37"]
 [ext_resource type="Texture2D" uid="uid://b8fs4tk3v1m7i" path="res://assets/icons/scroll_idle.png" id="10_c1l1k"]
 [ext_resource type="Script" uid="uid://cxtl08ryujc11" path="res://src/ui/main_screen/rules_label.gd" id="10_g4sju"]
+[ext_resource type="Texture2D" uid="uid://rnwo2tnf11s4" path="res://assets/icons/bell_colder.png" id="11_nwypu"]
+[ext_resource type="Texture2D" uid="uid://dhvnvnil6w1m1" path="res://assets/icons/bell_idle.png" id="12_t28dx"]
+[ext_resource type="Texture2D" uid="uid://bo7aw4gd4cm2y" path="res://assets/icons/bell_grayscale.png" id="13_t28dx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d2rst"]
 bg_color = Color(0.913725, 0, 0, 1)
@@ -35,6 +38,18 @@ corner_radius_top_right = 40
 corner_radius_bottom_right = 40
 corner_radius_bottom_left = 40
 shadow_color = Color(0, 0, 0, 0.603922)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nwypu"]
+bg_color = Color(0.0198703, 0.0283206, 0.0734615, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="GameUI" type="Control"]
 layout_mode = 3
@@ -219,20 +234,76 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 60
 text = "Time"
 
-[node name="NextCharacterButton" type="Button" parent="."]
+[node name="NextCharacterButton3" type="Button" parent="."]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 16.0
-offset_top = -169.165
-offset_right = 245.0
-offset_bottom = 50.8349
+offset_left = 11.0
+offset_top = -329.144
+offset_right = 240.0
+offset_bottom = -109.144
 grow_vertical = 2
 theme_override_font_sizes/font_size = 40
 text = "Next
 Judgement"
+
+[node name="NextCharacterContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 11.0
+offset_top = -214.0
+offset_right = 320.0
+offset_bottom = 77.0
+grow_vertical = 2
+scale = Vector2(0.757802, 1.1298)
+mouse_filter = 2
+
+[node name="Panel" type="PanelContainer" parent="NextCharacterContainer"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -154.5
+offset_top = -14.0
+offset_right = 154.5
+offset_bottom = 125.0
+grow_horizontal = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_nwypu")
+
+[node name="Label" type="Label" parent="NextCharacterContainer/Panel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 40
+text = "Next
+Judgement"
+horizontal_alignment = 1
+
+[node name="NextCharacterButton" type="TextureButton" parent="NextCharacterContainer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -144.5
+offset_top = -195.345
+offset_right = 143.5
+offset_bottom = 4.65533
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("12_t28dx")
+texture_hover = ExtResource("11_nwypu")
+texture_disabled = ExtResource("13_t28dx")
+ignore_texture_size = true
+stretch_mode = 0
 
 [node name="NbPeopleToJudgePanel" type="Panel" parent="."]
 unique_name_in_owner = true
@@ -376,7 +447,8 @@ stretch_mode = 0
 
 [connection signal="pressed" from="DefeatLayer/DefeatPanel/VBoxContainer/ReplayButton" to="DefeatLayer/DefeatPanel/VBoxContainer/ReplayButton" method="_on_pressed"]
 [connection signal="pressed" from="DefeatLayer/HideDefeatButton" to="DefeatLayer" method="_on_hide_defeat_button_pressed"]
-[connection signal="pressed" from="NextCharacterButton" to="." method="_on_next_character_button_pressed"]
+[connection signal="pressed" from="NextCharacterButton3" to="." method="_on_next_character_button_pressed"]
+[connection signal="pressed" from="NextCharacterContainer/NextCharacterButton" to="." method="_on_next_character_button_pressed"]
 [connection signal="pressed" from="NextLevelLayer/Panel/VBoxContainer/NextLevelButton" to="NextLevelLayer/Panel/VBoxContainer/NextLevelButton" method="_on_pressed"]
 [connection signal="pressed" from="RulesLayer/RulesPanel/RulesButton" to="RulesLayer" method="_on_rules_button_pressed"]
 [connection signal="pressed" from="RulesOpener" to="RulesLayer" method="_on_rules_opener_pressed"]
