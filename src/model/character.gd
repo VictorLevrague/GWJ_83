@@ -29,13 +29,21 @@ func add_actions(type: String, nb_actions: int, inverse_output_arrays: bool = fa
             "Negative":
                 actions_pool = ActionLibrary.negative_action_pool.duplicate()
                 output_action_array = negative_actions if not inverse_output_arrays else positive_actions
-        if inverse_output_arrays:
-            reverse_actions_value_signs(actions_pool)
         actions_pool.shuffle()
+        var selected_actions: Array[Action]
         if len(actions_pool) >= nb_actions:
-            output_action_array.append_array(actions_pool.slice(0, nb_actions))
+            selected_actions = actions_pool.slice(0, nb_actions)
         else:
-            output_action_array.append_array(actions_pool.slice(0, len(actions_pool)))
+            selected_actions = actions_pool.slice(0, len(actions_pool))
+        for action in selected_actions:
+            var action_duplicate: Action = action.duplicate_custom()
+            if inverse_output_arrays:
+                action_duplicate.value = - action_duplicate.value
+            output_action_array.append(action_duplicate)
+
+func reverse_actions_value_signs(array_action: Array[Action]) -> void:
+    for action in array_action:
+        action.value = - action.value
 
 func add_deadly_actions(nb_actions: int):
     if nb_actions: #maybe useless
@@ -49,7 +57,3 @@ func add_deadly_actions(nb_actions: int):
             elif action.automatic_destination == "hell":
                 output_action_array = negative_actions
             output_action_array.append(action)
-
-func reverse_actions_value_signs(array_action: Array[Action]) -> void:
-    for action in array_action:
-        action.value = - action.value
