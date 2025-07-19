@@ -64,7 +64,6 @@ func on_hell_decision():
 
 func modify_player_values():
     var total_action_value := current_character.compute_sum_action_values()
-    print("total_action_value: ", total_action_value)
     var cover_loss = convert_action_value_to_cover_completion(total_action_value, detection_threshold, cover_loss_multiplier)
     if cover_loss > maximum_cover_loss:
         cover_loss = maximum_cover_loss
