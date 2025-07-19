@@ -35,7 +35,8 @@ func heaven_animation() -> void:
 func victory():
     %NextLevelLayer.show()
 
-func defeat():
+func defeat(type: String):
+    %DefeatLayer.update_text(type)
     %DefeatLayer.show()
     %NextCharacterButton.disabled = true
     %CharacterUI.show_all_action_values()

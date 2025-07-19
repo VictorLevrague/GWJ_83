@@ -51,7 +51,7 @@ func on_heaven_decision():
     if are_people_left_to_judge():
         %GameUI.enable_next_character_call()
     else:
-        defeat()
+        defeat("No_people_left_to_judge")
 
 func on_hell_decision():
     if current_character:
@@ -64,14 +64,14 @@ func on_hell_decision():
             if action.automatic_destination == "heaven":
                 cover_percentage = 0
         if cover_percentage <= 0.:
-            defeat()
+            defeat("Cover_loss")
             return
         if hell_completion >= 100.:
             victory()
         if are_people_left_to_judge():
             %GameUI.enable_next_character_call()
         else:
-            defeat()
+            defeat("No_people_left_to_judge")
     else:
         push_warning("Character not attributed")
 
@@ -91,14 +91,14 @@ func enter_next_character():
         current_character = character_generator.create_character(max_positive_actions_per_character, max_negative_actions_per_character,
                                                                 max_wrongly_positioned_actions_per_character, max_nb_deadly_actions)
     else:
-        defeat()
+        defeat("No_people_left_to_judge")
 
 func victory() -> void:
     %GameUI.victory()
     %GameUI.get_node("%NextLevelLayer").show()
 
-func defeat() -> void:
-    %GameUI.defeat()
+func defeat(type: String) -> void:
+    %GameUI.defeat(type)
 
 func next_level():
     reset_level_stats()
@@ -158,16 +158,16 @@ func update_level_characteristics(level: int):
             max_negative_actions_per_character = 3
             max_wrongly_positioned_actions_per_character = 0
             max_nb_deadly_actions = 1
-            nb_persons_to_hell_to_complete_level = 10
+            nb_persons_to_hell_to_complete_level = 8
             total_nb_persons_to_judge = 15
-            cover_loss_multiplier = 0.8
+            cover_loss_multiplier = 0.7
             maximum_cover_loss = 100
         "3":
             max_positive_actions_per_character = 3
             max_negative_actions_per_character = 3
             max_nb_deadly_actions = 1
             max_wrongly_positioned_actions_per_character = 1
-            nb_persons_to_hell_to_complete_level = 10
+            nb_persons_to_hell_to_complete_level = 8
             total_nb_persons_to_judge = 15
-            cover_loss_multiplier = 0.9
+            cover_loss_multiplier = 0.8
             maximum_cover_loss = 100
