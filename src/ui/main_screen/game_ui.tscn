@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cp2lph3fek53m"]
+[gd_scene load_steps=19 format=3 uid="uid://cp2lph3fek53m"]
 
 [ext_resource type="Script" uid="uid://clagwd32ypgph" path="res://src/ui/main_screen/game_ui.gd" id="1_mj8uy"]
 [ext_resource type="PackedScene" uid="uid://cumtr8ohypw6f" path="res://src/ui/character/character_ui.tscn" id="2_3rlp6"]
@@ -7,8 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://vci1o27g2pgt" path="res://src/ui/heaven_button_container.tscn" id="3_g4sju"]
 [ext_resource type="PackedScene" uid="uid://bw2ih1pk6v07x" path="res://src/ui/hell_button_container.tscn" id="4_2kjp8"]
 [ext_resource type="Script" uid="uid://jdng4kd4qh4v" path="res://src/ui/main_screen/next_level_button.gd" id="4_cc1gc"]
+[ext_resource type="Script" uid="uid://cv4q1i6j6p1jy" path="res://src/ui/main_screen/defeat_layer.gd" id="7_d1lil"]
 [ext_resource type="Script" uid="uid://5u6lggbv6twh" path="res://src/ui/main_screen/replay_button.gd" id="8_2kjp8"]
 [ext_resource type="StyleBox" uid="uid://didhwndqt1b3n" path="res://src/ui/character/action_panel.tres" id="8_imge8"]
+[ext_resource type="Texture2D" uid="uid://bil0enmyvouqa" path="res://assets/icons/eye_cold.png" id="8_u0kh7"]
+[ext_resource type="Texture2D" uid="uid://pxp7sfjksf4o" path="res://assets/icons/eye_background.png" id="9_d1lil"]
 [ext_resource type="Script" uid="uid://eu30kudllccc" path="res://src/ui/main_screen/rules_layer.gd" id="9_w7w37"]
 [ext_resource type="Texture2D" uid="uid://b8fs4tk3v1m7i" path="res://assets/icons/scroll_idle.png" id="10_c1l1k"]
 [ext_resource type="Script" uid="uid://cxtl08ryujc11" path="res://src/ui/main_screen/rules_label.gd" id="10_g4sju"]
@@ -138,8 +141,10 @@ offset_bottom = 219.118
 [node name="DefeatLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 visible = false
+script = ExtResource("7_d1lil")
 
-[node name="Panel" type="Panel" parent="DefeatLayer"]
+[node name="DefeatPanel" type="Panel" parent="DefeatLayer"]
+unique_name_in_owner = true
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -153,7 +158,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_o1vnd")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DefeatLayer/Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="DefeatLayer/DefeatPanel"]
 layout_mode = 0
 offset_left = 111.0
 offset_top = 115.0
@@ -161,7 +166,7 @@ offset_right = 1576.0
 offset_bottom = 664.0
 theme_override_constants/separation = 60
 
-[node name="Label" type="RichTextLabel" parent="DefeatLayer/Panel/VBoxContainer"]
+[node name="Label" type="RichTextLabel" parent="DefeatLayer/DefeatPanel/VBoxContainer"]
 modulate = Color(0.0562945, 0.00369703, 0.108891, 1)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 60
@@ -170,12 +175,22 @@ text = "WAIT A MINUTE !!! You're not the purgatory judge, you filthy demon.
 GET OUT"
 fit_content = true
 
-[node name="ReplayButton" type="Button" parent="DefeatLayer/Panel/VBoxContainer"]
+[node name="ReplayButton" type="Button" parent="DefeatLayer/DefeatPanel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 60
 text = "TRY AGAIN"
 script = ExtResource("8_2kjp8")
+
+[node name="HideDefeatButton" type="TextureButton" parent="DefeatLayer"]
+offset_left = 123.0
+offset_top = 211.0
+offset_right = 245.0
+offset_bottom = 326.0
+texture_normal = ExtResource("8_u0kh7")
+texture_hover = ExtResource("9_d1lil")
+ignore_texture_size = true
+stretch_mode = 0
 
 [node name="Time" type="Panel" parent="."]
 visible = false
@@ -359,7 +374,8 @@ texture_hover = ExtResource("10_c1l1k")
 ignore_texture_size = true
 stretch_mode = 0
 
-[connection signal="pressed" from="DefeatLayer/Panel/VBoxContainer/ReplayButton" to="DefeatLayer/Panel/VBoxContainer/ReplayButton" method="_on_pressed"]
+[connection signal="pressed" from="DefeatLayer/DefeatPanel/VBoxContainer/ReplayButton" to="DefeatLayer/DefeatPanel/VBoxContainer/ReplayButton" method="_on_pressed"]
+[connection signal="pressed" from="DefeatLayer/HideDefeatButton" to="DefeatLayer" method="_on_hide_defeat_button_pressed"]
 [connection signal="pressed" from="NextCharacterButton" to="." method="_on_next_character_button_pressed"]
 [connection signal="pressed" from="NextLevelLayer/Panel/VBoxContainer/NextLevelButton" to="NextLevelLayer/Panel/VBoxContainer/NextLevelButton" method="_on_pressed"]
 [connection signal="pressed" from="RulesLayer/RulesPanel/RulesButton" to="RulesLayer" method="_on_rules_button_pressed"]

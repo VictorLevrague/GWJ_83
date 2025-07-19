@@ -6,10 +6,8 @@ var character: Character:
         if character:
             %Texture.texture = character.illustration
             %Texture.material = ShaderMaterial.new()
-            #fill_actions_container(%PositiveActionsContainer, character.positive_actions, Color(0.498039, 1, 0, 1))
-            #fill_actions_container(%NegativeActionsContainer, character.negative_actions, Color(1, 0, 0, 1))
-            show_action_values(%PositiveActionsContainer, character.positive_actions, Color(0.498039, 1, 0, 1))
-            show_action_values(%NegativeActionsContainer, character.negative_actions, Color(1, 0, 0, 1))
+            fill_actions_container(%PositiveActionsContainer, character.positive_actions, Color(0.498039, 1, 0, 1))
+            fill_actions_container(%NegativeActionsContainer, character.negative_actions, Color(1, 0, 0, 1))
             entering_animation()
         else:
             push_error("Missing full character")
@@ -76,8 +74,11 @@ func clear_action_containers():
     clear(%PositiveActionsContainer)
     clear(%NegativeActionsContainer)
 
+func show_all_action_values():
+    show_action_values(%PositiveActionsContainer, character.positive_actions, Color(0.498039, 1, 0, 1))
+    show_action_values(%NegativeActionsContainer, character.negative_actions, Color(1, 0, 0, 1))
+
 func show_action_values(container: Container, actions: Array[Action], color: Color):
-    #A tester
     clear(container)
     for action in actions:
         var label = load("res://src/ui/character/action_label.tscn").instantiate()

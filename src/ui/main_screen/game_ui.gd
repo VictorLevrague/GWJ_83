@@ -38,6 +38,7 @@ func victory():
 func defeat():
     %DefeatLayer.show()
     %NextCharacterButton.disabled = true
+    %CharacterUI.show_all_action_values()
 
 func disable_buttons() -> void:
     %HeavenButtonContainer.disable_button()
