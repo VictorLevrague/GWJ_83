@@ -37,6 +37,19 @@ func add_actions(type: String, nb_actions: int, inverse_output_arrays: bool = fa
         else:
             output_action_array.append_array(actions_pool.slice(0, len(actions_pool)))
 
+func add_deadly_actions(nb_actions: int):
+    if nb_actions: #maybe useless
+        var output_action_array: Array[Action]
+        var actions_pool: Array[Action] = ActionLibrary.deadly_actions_pool.duplicate()
+        actions_pool.shuffle()
+        for nb_action in nb_actions:
+            var action: Action = actions_pool.pop_front()
+            if action.automatic_destination == "heaven":
+                output_action_array = positive_actions
+            elif action.automatic_destination == "hell":
+                output_action_array = negative_actions
+            output_action_array.append(action)
+
 func reverse_actions_value_signs(array_action: Array[Action]) -> void:
     for action in array_action:
         action.value = - action.value

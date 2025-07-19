@@ -16,12 +16,13 @@ var cover_percentage: float = 100.:
         await %GameUI.update_progress_bar("cover", cover_percentage)
 var detection_threshold: float = 10.
 
-var nb_persons_to_hell_to_complete_level: int = 5
-var total_nb_persons_to_judge: int = 10
+var nb_persons_to_hell_to_complete_level: int
+var total_nb_persons_to_judge: int
 var nb_persons_judged: int = 0
 var max_positive_actions_per_character = 2
 var max_negative_actions_per_character = 2
 var max_wrongly_positioned_actions_per_character = 0
+var max_nb_deadly_actions = 0
 var cover_loss_multiplier = 0.8
 var maximum_cover_loss = 80
 
@@ -46,6 +47,9 @@ func on_heaven_decision():
     %GameUI.update_people_to_judge_label(nb_persons_judged, total_nb_persons_to_judge)
     %GameUI.disable_buttons()
     await %GameUI.heaven_animation()
+    for action in current_character.negative_actions:
+        if action.automatic_destination == "hell":
+            cover_percentage = 0
     if are_people_left_to_judge():
         %GameUI.enable_next_character_call()
     else:
@@ -58,6 +62,9 @@ func on_hell_decision():
         modify_player_values()
         %GameUI.disable_buttons()
         await %GameUI.hell_animation()
+        for action in current_character.positive_actions:
+            if action.automatic_destination == "heaven":
+                cover_percentage = 0
         if cover_percentage <= 0.:
             defeat()
             return
@@ -84,7 +91,7 @@ func modify_player_values():
 func enter_next_character():
     if are_people_left_to_judge():
         current_character = character_generator.create_character(max_positive_actions_per_character, max_negative_actions_per_character,
-                                                                max_wrongly_positioned_actions_per_character)
+                                                                max_wrongly_positioned_actions_per_character, max_nb_deadly_actions)
     else:
         defeat()
 
@@ -143,20 +150,22 @@ func update_level_characteristics(level: int):
             max_positive_actions_per_character = 2
             max_negative_actions_per_character = 2
             max_wrongly_positioned_actions_per_character = 0
-            nb_persons_to_hell_to_complete_level = 6
+            nb_persons_to_hell_to_complete_level = 1
             total_nb_persons_to_judge = 10
             cover_loss_multiplier = 0.7
             maximum_cover_loss = 80
         "2":
             max_positive_actions_per_character = 3
             max_negative_actions_per_character = 3
+            max_nb_deadly_actions = 1
             nb_persons_to_hell_to_complete_level = 10
             total_nb_persons_to_judge = 15
             cover_loss_multiplier = 0.8
-            maximum_cover_loss = 90
+            maximum_cover_loss = 100
         "3":
             max_positive_actions_per_character = 3
             max_negative_actions_per_character = 3
+            max_nb_deadly_actions = 1
             max_wrongly_positioned_actions_per_character = 1
             nb_persons_to_hell_to_complete_level = 10
             total_nb_persons_to_judge = 15
