@@ -148,7 +148,7 @@ func update_level_characteristics(level: int):
             max_positive_actions_per_character = 2
             max_negative_actions_per_character = 2
             max_wrongly_positioned_actions_per_character = 0
-            max_nb_deadly_actions = 1
+            max_nb_deadly_actions = 0
             nb_persons_to_hell_to_complete_level = 6
             total_nb_persons_to_judge = 10
             cover_loss_multiplier = 0.7
