@@ -7,8 +7,6 @@ var current_character: Character:
 var hell_completion: float = 0.:
     set(value):
         hell_completion = value
-        #if cover_percentage > 0.:
-            #await %GameUI.update_progress_bar("hell", hell_completion)
         await %GameUI.update_progress_bar("hell", hell_completion)
 var cover_percentage: float = 100.:
     set(value):
@@ -18,14 +16,14 @@ var detection_threshold: float = 10.
 
 var nb_persons_to_hell_to_complete_level: int
 var total_nb_persons_to_judge: int
-var nb_persons_judged: int = 0
-var max_positive_actions_per_character = 2
-var max_negative_actions_per_character = 2
-var max_wrongly_positioned_actions_per_character = 0
-var max_nb_deadly_actions = 0
-var cover_loss_multiplier = 0.8
-var maximum_cover_loss = 80
+var max_positive_actions_per_character: int
+var max_negative_actions_per_character: int
+var max_wrongly_positioned_actions_per_character: int
+var max_nb_deadly_actions: int
+var cover_loss_multiplier: float
+var maximum_cover_loss: float
 
+var nb_persons_judged: int = 0
 var current_level = 0
 
 var character_generator: CharacterGenerator = CharacterGenerator.new()
@@ -150,13 +148,15 @@ func update_level_characteristics(level: int):
             max_positive_actions_per_character = 2
             max_negative_actions_per_character = 2
             max_wrongly_positioned_actions_per_character = 0
-            nb_persons_to_hell_to_complete_level = 1
+            max_nb_deadly_actions = 1
+            nb_persons_to_hell_to_complete_level = 6
             total_nb_persons_to_judge = 10
             cover_loss_multiplier = 0.7
             maximum_cover_loss = 80
         "2":
             max_positive_actions_per_character = 3
             max_negative_actions_per_character = 3
+            max_wrongly_positioned_actions_per_character = 0
             max_nb_deadly_actions = 1
             nb_persons_to_hell_to_complete_level = 10
             total_nb_persons_to_judge = 15
