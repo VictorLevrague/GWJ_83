@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cv7nguxlqdmhh"]
+[gd_scene load_steps=16 format=3 uid="uid://cv7nguxlqdmhh"]
 
 [ext_resource type="Texture2D" uid="uid://dpfb0tfekq2m4" path="res://assets/background.png" id="1_u7epu"]
 [ext_resource type="Shader" uid="uid://c7c2cu7m34f0w" path="res://src/shaders/background_fire.gdshader" id="2_0t3wg"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" uid="uid://do2lcljd40d2n" path="res://src/ui/main_screen/tutorial_button.gd" id="7_f4t3c"]
 [ext_resource type="StyleBox" uid="uid://didhwndqt1b3n" path="res://src/ui/character/action_panel.tres" id="9_bndtn"]
 [ext_resource type="PackedScene" uid="uid://ct1vpo7esd1h5" path="res://src/ui/option_menu.tscn" id="11_aeydw"]
+[ext_resource type="Texture2D" uid="uid://2srjimwpyks1" path="res://assets/title.png" id="12_h42sf"]
+[ext_resource type="Texture2D" uid="uid://5nrshm61hck" path="res://assets/devil_idle.png" id="13_6cbk0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f4t3c"]
 shader = ExtResource("2_0t3wg")
@@ -56,20 +58,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Title" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -678.5
-offset_top = 55.0
-offset_right = 681.5
-offset_bottom = 206.0
-grow_horizontal = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 150
-text = "Make them go to hell"
+[node name="DevilIdle" type="Sprite2D" parent="."]
+position = Vector2(223.077, 579.645)
+scale = Vector2(0.307434, 0.291633)
+texture = ExtResource("13_6cbk0")
 
 [node name="TutorialButton" type="TextureButton" parent="."]
 material = SubResource("ShaderMaterial_aeydw")
@@ -199,6 +191,19 @@ offset_right = 1715.0
 offset_bottom = 761.0
 grow_horizontal = 1
 grow_vertical = 1
+
+[node name="Title" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -699.0
+offset_top = 47.0
+offset_right = 700.0
+offset_bottom = 218.0
+grow_horizontal = 2
+texture = ExtResource("12_h42sf")
+expand_mode = 1
 
 [connection signal="mouse_entered" from="TutorialButton" to="TutorialButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="TutorialButton" to="TutorialButton" method="_on_mouse_exited"]
