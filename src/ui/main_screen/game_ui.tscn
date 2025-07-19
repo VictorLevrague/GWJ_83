@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cp2lph3fek53m"]
+[gd_scene load_steps=25 format=3 uid="uid://cp2lph3fek53m"]
 
 [ext_resource type="Script" uid="uid://clagwd32ypgph" path="res://src/ui/main_screen/game_ui.gd" id="1_mj8uy"]
 [ext_resource type="PackedScene" uid="uid://cumtr8ohypw6f" path="res://src/ui/character/character_ui.tscn" id="2_3rlp6"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://rnwo2tnf11s4" path="res://assets/icons/bell_colder.png" id="11_nwypu"]
 [ext_resource type="Texture2D" uid="uid://dhvnvnil6w1m1" path="res://assets/icons/bell_idle.png" id="12_t28dx"]
 [ext_resource type="Texture2D" uid="uid://bo7aw4gd4cm2y" path="res://assets/icons/bell_grayscale.png" id="13_t28dx"]
+[ext_resource type="Texture2D" uid="uid://5nrshm61hck" path="res://assets/devil_idle.png" id="17_f4fpw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d2rst"]
 bg_color = Color(0.913725, 0, 0, 1)
@@ -387,6 +388,12 @@ size_flags_vertical = 3
 theme_override_font_sizes/font_size = 80
 text = "Next day"
 script = ExtResource("4_cc1gc")
+
+[node name="DevilIdle" type="Sprite2D" parent="NextLevelLayer"]
+position = Vector2(1582.79, 800.814)
+scale = Vector2(0.303044, 0.298396)
+texture = ExtResource("17_f4fpw")
+flip_h = true
 
 [node name="RulesLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
