@@ -38,6 +38,7 @@ func victory():
 func defeat(type: String):
     %DefeatLayer.update_text(type)
     %DefeatLayer.show()
+    print("showing defeat layer")
     %NextCharacterButton.disabled = true
     %CharacterUI.show_all_action_values()
 

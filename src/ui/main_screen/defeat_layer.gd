@@ -2,6 +2,7 @@ extends CanvasLayer
 
 func _on_hide_defeat_button_pressed() -> void:
     %DefeatPanel.visible = not %DefeatPanel.visible
+    %DevilAngry.visible = not %DevilAngry.visible
 
 func update_text(type: String):
     match type:

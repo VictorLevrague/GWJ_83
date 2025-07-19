@@ -246,22 +246,6 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 60
 text = "Time"
 
-[node name="NextCharacterButton3" type="Button" parent="."]
-unique_name_in_owner = true
-visible = false
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 11.0
-offset_top = -329.144
-offset_right = 240.0
-offset_bottom = -109.144
-grow_vertical = 2
-theme_override_font_sizes/font_size = 40
-text = "Next
-Judgement"
-
 [node name="NextCharacterContainer" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 4
@@ -465,7 +449,6 @@ stretch_mode = 0
 
 [connection signal="pressed" from="DefeatLayer/DefeatPanel/VBoxContainer/ReplayButton" to="DefeatLayer/DefeatPanel/VBoxContainer/ReplayButton" method="_on_pressed"]
 [connection signal="pressed" from="DefeatLayer/HideDefeatButton" to="DefeatLayer" method="_on_hide_defeat_button_pressed"]
-[connection signal="pressed" from="NextCharacterButton3" to="." method="_on_next_character_button_pressed"]
 [connection signal="pressed" from="NextCharacterContainer/NextCharacterButton" to="." method="_on_next_character_button_pressed"]
 [connection signal="pressed" from="NextLevelLayer/Panel/VBoxContainer/NextLevelButton" to="NextLevelLayer/Panel/VBoxContainer/NextLevelButton" method="_on_pressed"]
 [connection signal="pressed" from="RulesLayer/RulesPanel/RulesButton" to="RulesLayer" method="_on_rules_button_pressed"]

@@ -68,6 +68,7 @@ func on_hell_decision():
             return
         if hell_completion >= 100.:
             victory()
+            return
         if are_people_left_to_judge():
             %GameUI.enable_next_character_call()
         else:
