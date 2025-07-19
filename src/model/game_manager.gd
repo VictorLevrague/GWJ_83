@@ -7,14 +7,13 @@ var current_character: Character:
 var hell_completion: float = 0.:
     set(value):
         hell_completion = value
-        if cover_percentage > 0.:
-            await %GameUI.update_progress_bar("hell", hell_completion)
+        #if cover_percentage > 0.:
+            #await %GameUI.update_progress_bar("hell", hell_completion)
+        await %GameUI.update_progress_bar("hell", hell_completion)
 var cover_percentage: float = 100.:
     set(value):
         cover_percentage = value
         await %GameUI.update_progress_bar("cover", cover_percentage)
-        if cover_percentage <= 0.:
-            defeat()
 var detection_threshold: float = 10.
 
 var nb_persons_to_hell_to_complete_level: int = 5
@@ -35,6 +34,7 @@ func _ready() -> void:
     Signals.send_to_hell.connect(Callable(self, "on_hell_decision"))
     Signals.next_character.connect(Callable(self, "enter_next_character"))
     Signals.next_level.connect(Callable(self, "next_level"))
+    Signals.restart_level.connect(Callable(self, "restart_level"))
     next_level()
     %GameUI.update_people_to_judge_label(nb_persons_judged, total_nb_persons_to_judge)
 
@@ -52,6 +52,9 @@ func on_hell_decision():
         modify_player_values()
         %GameUI.disable_buttons()
         await %GameUI.hell_animation()
+        if cover_percentage <= 0.:
+            defeat()
+            return
         if hell_completion >= 100.:
             victory()
         if are_people_left_to_judge():
@@ -118,25 +121,32 @@ func convert_action_value_to_detection_threshold_loss(value: float):
 func reset_level_stats():
     nb_persons_judged = -1
     hell_completion = 0
+    print("hell_completion: ", hell_completion)
     cover_percentage = 100
     detection_threshold = 10
 
+
+func restart_level():
+    %GameUI.get_node("%DefeatLayer").hide()
+    reset_level_stats()
+    %GameUI.enter_new_character()
+    
 func update_level_characteristics(level: int):
     match str(level):
         "1":
             max_positive_actions_per_character = 2
             max_negative_actions_per_character = 2
             max_wrongly_positioned_actions_per_character = 0
-            nb_persons_to_hell_to_complete_level = 7
+            nb_persons_to_hell_to_complete_level = 6
             total_nb_persons_to_judge = 10
-            cover_loss_multiplier = 0.8
+            cover_loss_multiplier = 0.7
             maximum_cover_loss = 80
         "2":
             max_positive_actions_per_character = 3
             max_negative_actions_per_character = 3
             nb_persons_to_hell_to_complete_level = 10
             total_nb_persons_to_judge = 15
-            cover_loss_multiplier = 0.9
+            cover_loss_multiplier = 0.8
             maximum_cover_loss = 90
         "3":
             max_positive_actions_per_character = 3
@@ -144,5 +154,5 @@ func update_level_characteristics(level: int):
             max_wrongly_positioned_actions_per_character = 1
             nb_persons_to_hell_to_complete_level = 10
             total_nb_persons_to_judge = 15
-            cover_loss_multiplier = 1.0
+            cover_loss_multiplier = 0.9
             maximum_cover_loss = 100

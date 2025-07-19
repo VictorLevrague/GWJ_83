@@ -1,4 +1,5 @@
 extends Button
 
 func _on_pressed() -> void:
-    get_tree().reload_current_scene()
+    #get_tree().reload_current_scene()
+    Signals.emit_signal("restart_level")
