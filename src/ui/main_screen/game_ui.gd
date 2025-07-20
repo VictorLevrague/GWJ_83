@@ -80,11 +80,11 @@ func update_rules(level: int):
     var rules: String = "[center][color=red]Rules of the purgatory (Day %s):[/color][/center]\n" % [level]
     match str(level):
         "1":
-            new_rules.append("\n∘ Judge people fairly based on the weight of their actions")
+            new_rules.append("\n° Judge people fairly based on the weight of their actions")
         "2":
-            new_rules.append("\n∘ Tremendously positive and negative actions must lead to Heaven or Hell, respectively.")
+            new_rules.append("\n° Tremendously positive and negative actions must lead to Heaven or Hell, respectively.")
         "3":
-            new_rules.append("\n∘ Positive and negative action lists may have been mixed.")
+            new_rules.append("\n° Positive and negative action lists may have been mixed.")
     for new_rule in new_rules:
         rules = rules + new_rule
     %RulesLabel.text = rules
