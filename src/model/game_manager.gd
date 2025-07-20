@@ -48,6 +48,8 @@ func on_heaven_decision():
     for action in current_character.negative_actions:
         if action.automatic_destination == "hell":
             cover_percentage = 0
+            defeat("Cover_loss")
+            return
     if are_people_left_to_judge():
         %GameUI.enable_next_character_call()
     else:
@@ -165,7 +167,7 @@ func update_level_characteristics(level: int):
             nb_persons_to_hell_to_complete_level = 8
             total_nb_persons_to_judge = 15
             cover_loss_multiplier = 0.7
-            maximum_cover_loss = 100
+            maximum_cover_loss = 90
         "3":
             max_positive_actions_per_character = 3
             max_negative_actions_per_character = 3
