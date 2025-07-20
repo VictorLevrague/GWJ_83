@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cp2lph3fek53m"]
+[gd_scene load_steps=26 format=3 uid="uid://cp2lph3fek53m"]
 
 [ext_resource type="Script" uid="uid://clagwd32ypgph" path="res://src/ui/main_screen/game_ui.gd" id="1_mj8uy"]
 [ext_resource type="PackedScene" uid="uid://cumtr8ohypw6f" path="res://src/ui/character/character_ui.tscn" id="2_3rlp6"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://dhvnvnil6w1m1" path="res://assets/icons/bell_idle.png" id="12_t28dx"]
 [ext_resource type="Texture2D" uid="uid://bo7aw4gd4cm2y" path="res://assets/icons/bell_grayscale.png" id="13_t28dx"]
 [ext_resource type="Texture2D" uid="uid://5nrshm61hck" path="res://assets/devil_idle.png" id="17_f4fpw"]
+[ext_resource type="Script" uid="uid://bauy3b6ywy8a3" path="res://src/ui/main_screen/restart_button.gd" id="18_fpde6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d2rst"]
 bg_color = Color(0.913725, 0, 0, 1)
@@ -61,6 +62,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mj8uy")
+metadata/_edit_horizontal_guides_ = [-77.8534]
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 1
@@ -379,6 +381,54 @@ scale = Vector2(0.303044, 0.298396)
 texture = ExtResource("17_f4fpw")
 flip_h = true
 
+[node name="EndGameLayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+visible = false
+
+[node name="Panel" type="Panel" parent="EndGameLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -843.0
+offset_top = -329.144
+offset_right = 843.0
+offset_bottom = 514.856
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_o1vnd")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EndGameLayer/Panel"]
+layout_mode = 0
+offset_left = 111.0
+offset_top = 115.0
+offset_right = 1576.0
+offset_bottom = 784.0
+theme_override_constants/separation = 60
+
+[node name="NextLevelLabel" type="Label" parent="EndGameLayer/Panel/VBoxContainer"]
+modulate = Color(0.0562945, 0.00369703, 0.108891, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "Great work pal, that is enough souls for 
+this week.
+Now, do more next day and you might have
+access to some of my powers !"
+
+[node name="RestartButton" type="Button" parent="EndGameLayer/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 80
+text = "Replay"
+script = ExtResource("18_fpde6")
+
+[node name="DevilIdle" type="Sprite2D" parent="EndGameLayer"]
+position = Vector2(1582.79, 800.814)
+scale = Vector2(0.303044, 0.298396)
+texture = ExtResource("17_f4fpw")
+flip_h = true
+
 [node name="RulesLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 visible = false
@@ -451,5 +501,6 @@ stretch_mode = 0
 [connection signal="pressed" from="DefeatLayer/HideDefeatButton" to="DefeatLayer" method="_on_hide_defeat_button_pressed"]
 [connection signal="pressed" from="NextCharacterContainer/NextCharacterButton" to="." method="_on_next_character_button_pressed"]
 [connection signal="pressed" from="NextLevelLayer/Panel/VBoxContainer/NextLevelButton" to="NextLevelLayer/Panel/VBoxContainer/NextLevelButton" method="_on_pressed"]
+[connection signal="pressed" from="EndGameLayer/Panel/VBoxContainer/RestartButton" to="EndGameLayer/Panel/VBoxContainer/RestartButton" method="_on_pressed"]
 [connection signal="pressed" from="RulesLayer/RulesPanel/RulesButton" to="RulesLayer" method="_on_rules_button_pressed"]
 [connection signal="pressed" from="RulesOpener" to="RulesLayer" method="_on_rules_opener_pressed"]
