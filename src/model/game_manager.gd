@@ -95,6 +95,9 @@ func enter_next_character():
         defeat("No_people_left_to_judge")
 
 func victory() -> void:
+    if current_level == 5:
+        endgame()
+        return
     %GameUI.victory()
     %GameUI.get_node("%NextLevelLayer").show()
 
@@ -172,3 +175,24 @@ func update_level_characteristics(level: int):
             total_nb_persons_to_judge = 15
             cover_loss_multiplier = 0.8
             maximum_cover_loss = 100
+        "4":
+            max_positive_actions_per_character = 3
+            max_negative_actions_per_character = 3
+            max_nb_deadly_actions = 1
+            max_wrongly_positioned_actions_per_character = 1
+            nb_persons_to_hell_to_complete_level = 11
+            total_nb_persons_to_judge = 20
+            cover_loss_multiplier = 0.9
+            maximum_cover_loss = 100
+        "5":
+            max_positive_actions_per_character = 3
+            max_negative_actions_per_character = 3
+            max_nb_deadly_actions = 1
+            max_wrongly_positioned_actions_per_character = 1
+            nb_persons_to_hell_to_complete_level = 14
+            total_nb_persons_to_judge = 25
+            cover_loss_multiplier = 1.0
+            maximum_cover_loss = 100
+
+func endgame():
+    %GameUI.get_node("%EndGameLayer").show()

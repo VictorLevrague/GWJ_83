@@ -405,11 +405,12 @@ offset_left = 111.0
 offset_top = 115.0
 offset_right = 1576.0
 offset_bottom = 784.0
-theme_override_constants/separation = 60
+theme_override_constants/separation = 100
 
 [node name="NextLevelLabel" type="Label" parent="EndGameLayer/Panel/VBoxContainer"]
 modulate = Color(0.0562945, 0.00369703, 0.108891, 1)
 layout_mode = 2
+size_flags_vertical = 6
 theme_override_font_sizes/font_size = 80
 text = "Great work pal, that is enough souls for 
 this week.
@@ -419,6 +420,7 @@ access to some of my powers !"
 [node name="RestartButton" type="Button" parent="EndGameLayer/Panel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 0.75
 theme_override_font_sizes/font_size = 80
 text = "Replay"
 script = ExtResource("18_fpde6")
