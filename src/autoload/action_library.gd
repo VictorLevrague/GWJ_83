@@ -6,7 +6,7 @@ var negative_action_pool: Array[Action] = [Action.new("Stole candies from a kid"
                                 Action.new("Racist", 100),
                                 Action.new("Shaked hand after toilets without hand cleaning", 20),
                                 Action.new("Cheated on partner", 50),
-                                Action.new("Abandonned a pet", 100),
+                                Action.new("Abandonned a pet", 130),
                                 Action.new("Lied frequently", 15),
                                 Action.new("Drove being drunk", 80),
                                 Action.new("Never said thank you", 15),

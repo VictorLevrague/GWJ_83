@@ -12,7 +12,7 @@ var cover_percentage: float = 100.:
     set(value):
         cover_percentage = value
         await %GameUI.update_progress_bar("cover", cover_percentage)
-var detection_threshold: float = 10.
+var detection_threshold: float = 20.
 
 var nb_persons_to_hell_to_complete_level: int
 var total_nb_persons_to_judge: int
@@ -139,7 +139,7 @@ func reset_level_stats():
     nb_persons_judged = 0
     hell_completion = 0
     cover_percentage = 100
-    detection_threshold = 10
+    detection_threshold = 20
 
 
 func restart_level():
