@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rnwo2tnf11s4"
-path="res://.godot/imported/bell_colder.png-86aa9ce8b66e06fe76188f9d119bcfbc.ctex"
+uid="uid://dqah6bcfp8ry0"
+path="res://.godot/imported/hammer_small_gray.png-ff73bdbc83ac0ee540ecdb1458c55bee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/bell_colder.png"
-dest_files=["res://.godot/imported/bell_colder.png-86aa9ce8b66e06fe76188f9d119bcfbc.ctex"]
+source_file="res://assets/icons/hammer_small_gray.png"
+dest_files=["res://.godot/imported/hammer_small_gray.png-ff73bdbc83ac0ee540ecdb1458c55bee.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dhvnvnil6w1m1"
-path="res://.godot/imported/bell_idle.png-01f92075c3113b42481c5d66255a15cf.ctex"
+uid="uid://cxcwfct2tyn35"
+path="res://.godot/imported/hammer_small.png-762fa588cc9b9eddce6d108eeefe6dde.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/bell_idle.png"
-dest_files=["res://.godot/imported/bell_idle.png-01f92075c3113b42481c5d66255a15cf.ctex"]
+source_file="res://assets/icons/hammer_small.png"
+dest_files=["res://.godot/imported/hammer_small.png-762fa588cc9b9eddce6d108eeefe6dde.ctex"]
 
 [params]
 

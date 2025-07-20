@@ -377,8 +377,8 @@ text = "Next day"
 script = ExtResource("4_cc1gc")
 
 [node name="DevilIdle" type="Sprite2D" parent="NextLevelLayer"]
-position = Vector2(1582.79, 800.814)
-scale = Vector2(0.303044, 0.298396)
+position = Vector2(1620.45, 846.032)
+scale = Vector2(0.243026, 0.241339)
 texture = ExtResource("17_f4fpw")
 flip_h = true
 
