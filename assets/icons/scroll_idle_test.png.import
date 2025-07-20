@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2jkkalyyv0g3"
-path="res://.godot/imported/hammer_pressed.png-deb2f4719c15e3dc0b724155b729479f.ctex"
+uid="uid://cijnhgj6qeeg"
+path="res://.godot/imported/scroll_idle_test.png-609ef8317822501357be80555a1d6977.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/hammer_pressed.png"
-dest_files=["res://.godot/imported/hammer_pressed.png-deb2f4719c15e3dc0b724155b729479f.ctex"]
+source_file="res://assets/icons/scroll_idle_test.png"
+dest_files=["res://.godot/imported/scroll_idle_test.png-609ef8317822501357be80555a1d6977.ctex"]
 
 [params]
 

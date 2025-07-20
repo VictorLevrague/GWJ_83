@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2jkkalyyv0g3"
-path="res://.godot/imported/hammer_pressed.png-deb2f4719c15e3dc0b724155b729479f.ctex"
+uid="uid://bcmg4rocgj0l7"
+path="res://.godot/imported/bell_test.png-1e2ab181e9e699f728b5f2833dc97b1c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/hammer_pressed.png"
-dest_files=["res://.godot/imported/hammer_pressed.png-deb2f4719c15e3dc0b724155b729479f.ctex"]
+source_file="res://assets/icons/bell_test.png"
+dest_files=["res://.godot/imported/bell_test.png-1e2ab181e9e699f728b5f2833dc97b1c.ctex"]
 
 [params]
 

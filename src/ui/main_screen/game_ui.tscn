@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cp2lph3fek53m"]
+[gd_scene load_steps=27 format=3 uid="uid://cp2lph3fek53m"]
 
 [ext_resource type="Script" uid="uid://clagwd32ypgph" path="res://src/ui/main_screen/game_ui.gd" id="1_mj8uy"]
 [ext_resource type="PackedScene" uid="uid://cumtr8ohypw6f" path="res://src/ui/character/character_ui.tscn" id="2_3rlp6"]
@@ -14,13 +14,14 @@
 [ext_resource type="Texture2D" uid="uid://pxp7sfjksf4o" path="res://assets/icons/eye_background.png" id="9_d1lil"]
 [ext_resource type="Texture2D" uid="uid://sohb8n0f3h8r" path="res://assets/devil_angry.png" id="9_lk476"]
 [ext_resource type="Script" uid="uid://eu30kudllccc" path="res://src/ui/main_screen/rules_layer.gd" id="9_w7w37"]
-[ext_resource type="Texture2D" uid="uid://b8fs4tk3v1m7i" path="res://assets/icons/scroll_idle.png" id="10_c1l1k"]
 [ext_resource type="Script" uid="uid://cxtl08ryujc11" path="res://src/ui/main_screen/rules_label.gd" id="10_g4sju"]
-[ext_resource type="Texture2D" uid="uid://rnwo2tnf11s4" path="res://assets/icons/bell_colder.png" id="11_nwypu"]
-[ext_resource type="Texture2D" uid="uid://dhvnvnil6w1m1" path="res://assets/icons/bell_idle.png" id="12_t28dx"]
-[ext_resource type="Texture2D" uid="uid://bo7aw4gd4cm2y" path="res://assets/icons/bell_grayscale.png" id="13_t28dx"]
+[ext_resource type="Texture2D" uid="uid://bcmg4rocgj0l7" path="res://assets/icons/bell_test.png" id="12_fpde6"]
+[ext_resource type="Texture2D" uid="uid://bgda857wgnu7t" path="res://assets/icons/bell_test_hover.png" id="13_36rko"]
+[ext_resource type="Texture2D" uid="uid://cmfwr806yfp3h" path="res://assets/icons/bell_test_grayscale.png" id="14_iog54"]
 [ext_resource type="Texture2D" uid="uid://5nrshm61hck" path="res://assets/devil_idle.png" id="17_f4fpw"]
 [ext_resource type="Script" uid="uid://bauy3b6ywy8a3" path="res://src/ui/main_screen/restart_button.gd" id="18_fpde6"]
+[ext_resource type="Texture2D" uid="uid://dpafo0wg6dkpy" path="res://assets/icons/scroll_test.png" id="21_36rko"]
+[ext_resource type="Texture2D" uid="uid://cijnhgj6qeeg" path="res://assets/icons/scroll_idle_test.png" id="22_iog54"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d2rst"]
 bg_color = Color(0.913725, 0, 0, 1)
@@ -291,15 +292,15 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -144.5
-offset_top = -195.345
-offset_right = 143.5
-offset_bottom = 4.65533
+offset_left = -98.5
+offset_top = -146.0
+offset_right = 122.5
+offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 0
-texture_normal = ExtResource("12_t28dx")
-texture_hover = ExtResource("11_nwypu")
-texture_disabled = ExtResource("13_t28dx")
+texture_normal = ExtResource("12_fpde6")
+texture_hover = ExtResource("13_36rko")
+texture_disabled = ExtResource("14_iog54")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -489,13 +490,13 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 31.0
-offset_top = -198.25
-offset_right = 169.0
-offset_bottom = -40.2501
+offset_left = 19.0
+offset_top = -198.0
+offset_right = 178.0
+offset_bottom = -40.0
 grow_vertical = 0
-texture_normal = ExtResource("10_c1l1k")
-texture_hover = ExtResource("10_c1l1k")
+texture_normal = ExtResource("21_36rko")
+texture_hover = ExtResource("22_iog54")
 ignore_texture_size = true
 stretch_mode = 0
 
