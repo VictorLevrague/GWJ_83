@@ -24,7 +24,6 @@ var negative_action_pool: Array[Action] = [Action.new("Stole candies from a kid"
 
 var positive_action_pool: Array[Action] = [Action.new("Gave money to charity", 30),
                                 Action.new("Bought local food", 15),
-                                Action.new("Ended a World War", 200),
                                 Action.new("Volunteer for a humanitarian association", 60),
                                 Action.new("Regular blood donator", 50),
                                 Action.new("Returned lost wallet without taking the money", 30),
@@ -61,8 +60,10 @@ var deadly_actions_pool: Array[Action] = [Action.new("Friend of god", 999, "heav
                       Action.new("Established world peace", 999, "heaven"),
                       Action.new("Sacrificed own soul to save another", 999, "heaven"),
                       Action.new("Brought extinct species back to life", 999, "heaven"),
+                      Action.new("Ended a World War", 999, "heaven"),
                       Action.new("Tried to kill god", 999, "hell"),
                       Action.new("Created a weapon to destroy the world", 999, "hell"),
                       Action.new("Murdered humans", 999, "hell"),
                       Action.new("Eradicated an animal species", 999, "hell"),
-                      Action.new("Started a World War", 999, "hell"),]
+                      Action.new("Started a World War", 999, "hell"),
+                      Action.new("Was a dictator", 999, "hell")]
